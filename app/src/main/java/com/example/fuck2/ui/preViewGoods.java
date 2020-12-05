@@ -27,5 +27,6 @@ public class preViewGoods extends LinearLayout {
 
     public preViewGoods(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        LayoutInflater.from(context).inflate(R.layout.preview_goods, this, true);
     }
 }

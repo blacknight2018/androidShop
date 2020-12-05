@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Fuck2</string>
     <string name="title_home">主页</string>
-    <string name="title_dashboard">分类</string>
+    <string name="title_dashboard">购物车</string>
     <string name="title_user">用户</string>
     <string name="title_address">我的地址</string>
     <string name="title_order">我的订单</string>

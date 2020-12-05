@@ -5,4 +5,5 @@
     <string name="title_user">用户</string>
     <string name="title_address">我的地址</string>
     <string name="title_order">我的订单</string>
+    <string name="title_hot">最热商品</string>
 </resources>

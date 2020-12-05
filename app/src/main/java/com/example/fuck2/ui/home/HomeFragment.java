@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment {
         banner.setImages(imgs);
         banner.setImageLoader(new ImageLoadBanner());
         banner.setBannerTitles(title);
-        banner.setDelayTime(2500);
+        banner.setDelayTime(5500);
         banner.isAutoPlay(true);
         banner.setIndicatorGravity(BannerConfig.CENTER);
         banner.setBannerAnimation(Transformer.Accordion);

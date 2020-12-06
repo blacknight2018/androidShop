@@ -65,6 +65,7 @@
         <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/appCompatCheckBox"
             android:layout_width="wrap_content"
+            android:buttonTint="@color/colorPrimary"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -84,9 +85,9 @@
         <TextView
             android:layout_width="130dp"
             android:layout_height="match_parent"
-            android:background="#c0392b"
+            android:background="@color/btn_submit2"
             android:gravity="center"
-            android:text="提交"
+            android:text="@string/btn_submit"
             android:textColor="#ffffff"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"

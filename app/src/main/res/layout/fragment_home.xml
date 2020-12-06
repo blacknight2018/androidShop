@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.flexbox.FlexboxLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backGroundSecond">
+    android:background="@color/backGroundSecond"
+    app:flexDirection="column">
 
     <SearchView
         android:id="@+id/search"
@@ -20,94 +21,181 @@
         app:layout_constraintTop_toBottomOf="@+id/search"
         tools:ignore="MissingConstraints" />
 
-    <RelativeLayout
-        android:id="@+id/title_hot"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:scrollbars="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/banner">
+        app:layout_constraintTop_toBottomOf="@+id/banner"
+        app:layout_flexGrow="1">
 
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:scaleType="center"
-            android:src="@drawable/hot_title"
-            app:riv_corner_radius="5dp"
-            app:riv_mutate_background="true"
-            app:riv_tile_mode="clamp" />
-
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/title_hot"
-            android:textColor="#ffffff"
-            android:textSize="20dp" />
-    </RelativeLayout>
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!--        Title-->
+            <RelativeLayout
+                android:id="@+id/title_hot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:scaleType="center"
+                    android:src="@drawable/hot_title"
+                    app:riv_corner_radius="5dp"
+                    app:riv_mutate_background="true"
+                    app:riv_tile_mode="clamp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/title_hot"
+                    android:textColor="#ffffff"
+                    android:textSize="20dp" />
+            </RelativeLayout>
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/hot_group1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                app:flexDirection="row"
+                app:justifyContent="space_between">
+
+                <com.example.fuck2.ui.preViewGoods
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.example.fuck2.ui.preViewGoods
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.example.fuck2.ui.preViewGoods
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </com.google.android.flexbox.FlexboxLayout>
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/hot_group2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                app:flexDirection="row"
+                app:justifyContent="space_between"
+                app:layout_constraintTop_toBottomOf="@+id/title_hot">
+
+                <com.example.fuck2.ui.preViewGoods
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.example.fuck2.ui.preViewGoods
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.example.fuck2.ui.preViewGoods
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </com.google.android.flexbox.FlexboxLayout>
 
 
-    <com.google.android.flexbox.FlexboxLayout
-        android:id="@+id/hot_group1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        app:flexDirection="row"
-        app:justifyContent="space_between"
-        app:layout_constraintTop_toBottomOf="@+id/title_hot">
+                    Newest
+                        <RelativeLayout
+                            android:id="@+id/title_newest"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="20dp"
+                            android:orientation="horizontal">
 
-        <com.example.fuck2.ui.preViewGoods
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+                            <com.makeramen.roundedimageview.RoundedImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="80dp"
+                                android:scaleType="center"
+                                android:src="@drawable/hot_title"
+                                app:riv_corner_radius="5dp"
+                                app:riv_mutate_background="true"
+                                app:riv_tile_mode="clamp" />
 
-        <com.example.fuck2.ui.preViewGoods
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:text="@string/title_newest"
+                                android:textColor="#ffffff"
+                                android:textSize="20dp" />
+                        </RelativeLayout>
 
-        <com.example.fuck2.ui.preViewGoods
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-    </com.google.android.flexbox.FlexboxLayout>
-    <com.google.android.flexbox.FlexboxLayout
-        android:id="@+id/hot_group2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        app:flexDirection="row"
-        app:justifyContent="space_between"
-        app:layout_constraintTop_toBottomOf="@+id/hot_group1">
+                        <com.google.android.flexbox.FlexboxLayout
+                            android:id="@+id/newest_group1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="20dp"
+                            app:flexDirection="row"
+                            app:justifyContent="space_between"
+                            app:layout_constraintTop_toBottomOf="@+id/title_hot">
 
-        <com.example.fuck2.ui.preViewGoods
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+                            <com.example.fuck2.ui.preViewGoods
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent" />
 
-        <com.example.fuck2.ui.preViewGoods
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+                            <com.example.fuck2.ui.preViewGoods
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent" />
 
-        <com.example.fuck2.ui.preViewGoods
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-    </com.google.android.flexbox.FlexboxLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+                            <com.example.fuck2.ui.preViewGoods
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent" />
+                        </com.google.android.flexbox.FlexboxLayout>
+
+                        <com.google.android.flexbox.FlexboxLayout
+                            android:id="@+id/newest_group2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="20dp"
+                            app:flexDirection="row"
+                            app:justifyContent="space_between">
+
+                            <com.example.fuck2.ui.preViewGoods
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <com.example.fuck2.ui.preViewGoods
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <com.example.fuck2.ui.preViewGoods
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </com.google.android.flexbox.FlexboxLayout>
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</com.google.android.flexbox.FlexboxLayout>

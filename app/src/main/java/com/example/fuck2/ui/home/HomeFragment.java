@@ -39,9 +39,9 @@ public class HomeFragment extends Fragment {
 
     void LoadBannerImg() {
         ArrayList<Integer> imgs = new ArrayList<>();
-        imgs.add(R.drawable.ic_home_black_24dp);
-        imgs.add(R.drawable.ic_home_black_24dp);
-        imgs.add(R.drawable.ic_home_black_24dp);
+        imgs.add(R.drawable.goods_1);
+        imgs.add(R.drawable.goods_2);
+        imgs.add(R.drawable.goods_3);
 
         ArrayList<String> title = new ArrayList<>();
         title.add("奥利奥");

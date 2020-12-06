@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.fuck2.AddAddress;
+import com.example.fuck2.AddressList;
 import com.example.fuck2.R;
 
 public class NotificationsFragment extends Fragment {
@@ -35,7 +35,7 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(getActivity(), AddAddress.class);
+                intent.setClass(getActivity(), AddressList.class);
                 startActivity(intent);
             }
         });

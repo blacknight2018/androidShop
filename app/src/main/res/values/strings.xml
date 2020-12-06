@@ -14,4 +14,5 @@
     <string name="sex_female">女</string>
     <string name="title_detail">详细</string>
     <string name="btn_submit">提交</string>
+    <string name="activity_address_list">我的地址</string>
 </resources>

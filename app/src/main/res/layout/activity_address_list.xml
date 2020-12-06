@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backGroundPrimary"
+    android:orientation="vertical"
+    android:padding="@dimen/padding"
+    tools:context=".AddressList">
+
+    <com.example.fuck2.ui.preViewAddress
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/backGroundSecond">
+
+    </com.example.fuck2.ui.preViewAddress>
+
+    <com.example.fuck2.ui.preViewAddress
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/backGroundSecond">
+
+    </com.example.fuck2.ui.preViewAddress>
+</LinearLayout>

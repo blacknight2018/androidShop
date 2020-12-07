@@ -112,86 +112,87 @@
             </com.google.android.flexbox.FlexboxLayout>
 
 
-                    Newest
-                        <RelativeLayout
-                            android:id="@+id/title_newest"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginRight="20dp"
-                            android:orientation="horizontal">
+            Newest
 
-                            <com.makeramen.roundedimageview.RoundedImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="80dp"
-                                android:scaleType="center"
-                                android:src="@drawable/hot_title"
-                                app:riv_corner_radius="5dp"
-                                app:riv_mutate_background="true"
-                                app:riv_tile_mode="clamp" />
+            <RelativeLayout
+                android:id="@+id/title_newest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:text="@string/title_newest"
-                                android:textColor="#ffffff"
-                                android:textSize="20dp" />
-                        </RelativeLayout>
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:scaleType="center"
+                    android:src="@drawable/hot_title"
+                    app:riv_corner_radius="5dp"
+                    app:riv_mutate_background="true"
+                    app:riv_tile_mode="clamp" />
 
-                        <com.google.android.flexbox.FlexboxLayout
-                            android:id="@+id/newest_group1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:paddingLeft="20dp"
-                            android:paddingRight="20dp"
-                            app:flexDirection="row"
-                            app:justifyContent="space_between"
-                            app:layout_constraintTop_toBottomOf="@+id/title_hot">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/title_newest"
+                    android:textColor="#ffffff"
+                    android:textSize="20dp" />
+            </RelativeLayout>
 
-                            <com.example.fuck2.ui.preViewGoods
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent" />
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/newest_group1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                app:flexDirection="row"
+                app:justifyContent="space_between"
+                app:layout_constraintTop_toBottomOf="@+id/title_hot">
 
-                            <com.example.fuck2.ui.preViewGoods
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent" />
+                <com.example.fuck2.ui.preViewGoods
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-                            <com.example.fuck2.ui.preViewGoods
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent" />
-                        </com.google.android.flexbox.FlexboxLayout>
+                <com.example.fuck2.ui.preViewGoods
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-                        <com.google.android.flexbox.FlexboxLayout
-                            android:id="@+id/newest_group2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:paddingLeft="20dp"
-                            android:paddingRight="20dp"
-                            app:flexDirection="row"
-                            app:justifyContent="space_between">
+                <com.example.fuck2.ui.preViewGoods
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </com.google.android.flexbox.FlexboxLayout>
 
-                            <com.example.fuck2.ui.preViewGoods
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/newest_group2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                app:flexDirection="row"
+                app:justifyContent="space_between">
 
-                            <com.example.fuck2.ui.preViewGoods
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
+                <com.example.fuck2.ui.preViewGoods
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-                            <com.example.fuck2.ui.preViewGoods
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
-                        </com.google.android.flexbox.FlexboxLayout>
+                <com.example.fuck2.ui.preViewGoods
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.example.fuck2.ui.preViewGoods
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </com.google.android.flexbox.FlexboxLayout>
         </LinearLayout>
 
 

@@ -47,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="30dp"
-        android:background="@drawable/item_selected"
+        android:background="@drawable/menu_item_selected"
         android:clickable="true"
         android:focusable="true"
         android:orientation="horizontal">
@@ -75,7 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="30dp"
-        android:background="@drawable/item_selected"
+        android:background="@drawable/menu_item_selected"
         android:clickable="true"
         android:focusable="true"
         android:orientation="horizontal">

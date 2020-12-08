@@ -14,7 +14,6 @@ public class SelectSpecPopWin extends PopupWindow {
 
     private View view;
 
-
     private Button btn_take_photo, btn_pick_photo, btn_cancel;
 
     public SelectSpecPopWin(Context mContext, View.OnClickListener itemsOnClick) {

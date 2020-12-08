@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/backGroundPrimary"
     android:orientation="vertical"
+    android:id="@+id/main_view"
     tools:context=".GoodsDetail">
 
     <com.youth.banner.Banner
@@ -83,11 +84,14 @@
         android:layout_marginBottom="10dp"
         android:background="@color/backGroundSecond"
         android:orientation="vertical"
+        android:clickable="true"
+        android:id="@+id/select_spec"
         android:paddingLeft="@dimen/padding"
         android:paddingTop="10dp"
         android:paddingBottom="10dp">
 
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -95,4 +99,15 @@
             android:textColor="#000000"
             android:textSize="16sp" />
     </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageView
+            android:background="@drawable/test_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 </LinearLayout>

@@ -1,9 +1,11 @@
 package com.example.fuck2;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,6 +27,23 @@ public class GoodsDetail extends AppCompatActivity {
         setContentView(R.layout.activity_goods_detail);
         banner = findViewById(R.id.banner);
         LoadBannerImg();
+
+
+        RelativeLayout textView = findViewById(R.id.select_spec);
+
+        final View.OnClickListener onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        };
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SelectSpecPopWin selectSpecPopWin = new SelectSpecPopWin(GoodsDetail.this, onClickListener);
+                selectSpecPopWin.showAtLocation(findViewById(R.id.main_view), Gravity.CENTER, 0, 0);
+            }
+        });
     }
 
     private void LoadBannerImg() {

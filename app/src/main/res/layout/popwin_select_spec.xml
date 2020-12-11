@@ -72,70 +72,16 @@
             android:layout_marginBottom="5dp"
             android:background="@android:color/darker_gray" />
 
-        <TextView
-            style="@style/spec_title"
-            android:layout_gravity="left"
-            android:text="Good" />
-
         <LinearLayout
+            android:id="@+id/spec_set"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:orientation="vertical">
-
-                <RadioButton
-                    style="@style/spec_btn"
-                    android:checked="false"
-                    android:text="Abcdefg" />
-
-                <RadioButton
-                    style="@style/spec_btn"
-                    android:text="1234567" />
-            </RadioGroup>
-
-
-        </LinearLayout>
-
+            android:orientation="vertical" />
 
         <TextView
-            style="@style/spec_title"
-            android:layout_gravity="left"
-            android:text="Good222" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:orientation="vertical">
-
-                <RadioButton
-                    style="@style/spec_btn"
-
-                    android:text="Abcdefg" />
-
-                <RadioButton
-                    style="@style/spec_btn"
-                    android:text="1234567" />
-            </RadioGroup>
-
-
-        </LinearLayout>
-
-
-        <TextView
-            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:layout_marginTop="20dp"
             android:background="@color/btn_submit2"
             android:gravity="center"
             android:text="@string/btn_add_cart"

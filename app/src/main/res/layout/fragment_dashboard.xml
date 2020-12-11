@@ -18,35 +18,35 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.example.fuck2.ui.cartItem
+            <com.example.fuck2.ui.CartItem
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <com.example.fuck2.ui.cartItem
+            <com.example.fuck2.ui.CartItem
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <com.example.fuck2.ui.cartItem
+            <com.example.fuck2.ui.CartItem
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <com.example.fuck2.ui.cartItem
+            <com.example.fuck2.ui.CartItem
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <com.example.fuck2.ui.cartItem
+            <com.example.fuck2.ui.CartItem
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <com.example.fuck2.ui.cartItem
+            <com.example.fuck2.ui.CartItem
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <com.example.fuck2.ui.cartItem
+            <com.example.fuck2.ui.CartItem
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <com.example.fuck2.ui.cartItem
+            <com.example.fuck2.ui.CartItem
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>

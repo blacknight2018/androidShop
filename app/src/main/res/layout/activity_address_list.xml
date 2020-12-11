@@ -8,21 +8,21 @@
     android:padding="@dimen/padding"
     tools:context=".AddressList">
 
-    <com.example.fuck2.ui.preViewAddress
+    <com.example.fuck2.ui.PreViewAddress
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:background="@color/backGroundSecond">
 
-    </com.example.fuck2.ui.preViewAddress>
+    </com.example.fuck2.ui.PreViewAddress>
 
-    <com.example.fuck2.ui.preViewAddress
+    <com.example.fuck2.ui.PreViewAddress
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:background="@color/backGroundSecond">
 
-    </com.example.fuck2.ui.preViewAddress>
+    </com.example.fuck2.ui.PreViewAddress>
 </LinearLayout>

@@ -3,6 +3,8 @@ package com.example.fuck2.ui.home;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +14,14 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.example.fuck2.GoodsDetail;
 import com.example.fuck2.R;
+import com.example.fuck2.config.Config;
+import com.example.fuck2.ui.PreViewGoods;
+import com.example.fuck2.utils.ApiThread;
+import com.example.fuck2.utils.Utils;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -21,12 +29,34 @@ import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     private View root;
     private Banner banner;
+    private List<PreViewGoods> hot = new ArrayList<>();
+    private List<PreViewGoods> newest = new ArrayList<>();
+    private HomeFragment.MHandler mHandler = new HomeFragment.MHandler();
+
+    private class MHandler extends Handler {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            int code = msg.what;
+            if (code == 0) {
+                String body = msg.obj.toString();
+                JSONArray hotSubGoods = JSONObject.parseObject(body).getJSONArray("data");
+                for (int i = 0; i < hotSubGoods.size(); i++) {
+                    hot.get(i).setTitle(hotSubGoods.getJSONObject(i).getString("title"));
+                    hot.get(i).setPrice(hotSubGoods.getJSONObject(i).getFloat("price"));
+                    hot.get(i).setImageUrl(hotSubGoods.getJSONObject(i).getString("img"));
+                }
+            }
+
+        }
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -43,7 +73,19 @@ public class HomeFragment extends Fragment {
             }
         });
         this.LoadBannerImg();
+        this.LoadHot();
         return root;
+    }
+
+    private void LoadHot() {
+        hot.clear();
+        hot.add((PreViewGoods) root.findViewById(R.id.hot_1));
+        hot.add((PreViewGoods) root.findViewById(R.id.hot_2));
+        hot.add((PreViewGoods) root.findViewById(R.id.hot_3));
+        hot.add((PreViewGoods) root.findViewById(R.id.hot_4));
+        hot.add((PreViewGoods) root.findViewById(R.id.hot_5));
+        hot.add((PreViewGoods) root.findViewById(R.id.hot_6));
+        new ApiThread(0, mHandler, "get", Config.getServerAddress() + "/v1/home/hot", Utils.EmptyString).start();
     }
 
     private void LoadBannerImg() {

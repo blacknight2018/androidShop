@@ -9,23 +9,23 @@ import androidx.annotation.Nullable;
 
 import com.example.fuck2.R;
 
-public class preViewAddress extends LinearLayout {
-    public preViewAddress(Context context) {
+public class PreViewAddress extends LinearLayout {
+    public PreViewAddress(Context context) {
         super(context);
         LayoutInflater.from(context).inflate(R.layout.preview_address, this, true);
     }
 
-    public preViewAddress(Context context, @Nullable AttributeSet attrs) {
+    public PreViewAddress(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.preview_address, this, true);
     }
 
-    public preViewAddress(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public PreViewAddress(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         LayoutInflater.from(context).inflate(R.layout.preview_address, this, true);
     }
 
-    public preViewAddress(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public PreViewAddress(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         LayoutInflater.from(context).inflate(R.layout.preview_address, this, true);
     }

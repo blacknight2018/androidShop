@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backGroundPrimary"
     android:orientation="vertical"
-    android:id="@+id/main_view"
     tools:context=".GoodsDetail">
 
     <com.youth.banner.Banner
@@ -78,14 +78,14 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/select_spec"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:background="@color/backGroundSecond"
-        android:orientation="vertical"
         android:clickable="true"
-        android:id="@+id/select_spec"
+        android:orientation="vertical"
         android:paddingLeft="@dimen/padding"
         android:paddingTop="10dp"
         android:paddingBottom="10dp">
@@ -100,14 +100,17 @@
             android:textSize="16sp" />
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/img"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <ImageView
-            android:background="@drawable/test_img"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/img_set"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

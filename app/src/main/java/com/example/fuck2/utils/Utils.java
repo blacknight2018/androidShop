@@ -1,6 +1,10 @@
 package com.example.fuck2.utils;
 
+import com.alibaba.fastjson.JSONArray;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Utils {
     public static String EmptyString = "";
@@ -18,6 +22,15 @@ public class Utils {
             ret = ret + param.get(keys[i]);
         }
         return ret;
+    }
+
+    public static List<String> ParseJSONString(String str) {
+        JSONArray jsonArray = JSONArray.parseArray(str);
+        List<String> stringList = new ArrayList<>();
+        for (int i = 0; i < jsonArray.size(); i++) {
+            stringList.add(jsonArray.get(i).toString());
+        }
+        return stringList;
     }
 
     public static void main(String[] args) {

@@ -74,21 +74,25 @@
                 app:flexDirection="row"
                 app:justifyContent="space_between">
 
-                <com.example.fuck2.ui.preViewGoods
+                <com.example.fuck2.ui.PreViewGoods
+                    android:id="@+id/hot_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <com.example.fuck2.ui.preViewGoods
+                <com.example.fuck2.ui.PreViewGoods
+                    android:id="@+id/hot_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <com.example.fuck2.ui.preViewGoods
+                <com.example.fuck2.ui.PreViewGoods
+                    android:id="@+id/hot_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </com.google.android.flexbox.FlexboxLayout>
 
             <com.google.android.flexbox.FlexboxLayout
                 android:id="@+id/hot_group2"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -98,21 +102,24 @@
                 app:justifyContent="space_between"
                 app:layout_constraintTop_toBottomOf="@+id/title_hot">
 
-                <com.example.fuck2.ui.preViewGoods
+                <com.example.fuck2.ui.PreViewGoods
+                    android:id="@+id/hot_4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <com.example.fuck2.ui.preViewGoods
+                <com.example.fuck2.ui.PreViewGoods
+                    android:id="@+id/hot_5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <com.example.fuck2.ui.preViewGoods
+                <com.example.fuck2.ui.PreViewGoods
+                    android:id="@+id/hot_6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </com.google.android.flexbox.FlexboxLayout>
 
 
-            Newest
+<!--            Newest-->
 
             <RelativeLayout
                 android:id="@+id/title_newest"
@@ -152,19 +159,19 @@
                 app:justifyContent="space_between"
                 app:layout_constraintTop_toBottomOf="@+id/title_hot">
 
-                <com.example.fuck2.ui.preViewGoods
+                <com.example.fuck2.ui.PreViewGoods
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
-                <com.example.fuck2.ui.preViewGoods
+                <com.example.fuck2.ui.PreViewGoods
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
-                <com.example.fuck2.ui.preViewGoods
+                <com.example.fuck2.ui.PreViewGoods
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -181,15 +188,15 @@
                 app:flexDirection="row"
                 app:justifyContent="space_between">
 
-                <com.example.fuck2.ui.preViewGoods
+                <com.example.fuck2.ui.PreViewGoods
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <com.example.fuck2.ui.preViewGoods
+                <com.example.fuck2.ui.PreViewGoods
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <com.example.fuck2.ui.preViewGoods
+                <com.example.fuck2.ui.PreViewGoods
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </com.google.android.flexbox.FlexboxLayout>

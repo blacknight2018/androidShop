@@ -12,7 +12,6 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -28,19 +27,24 @@ import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
-
-    private HomeViewModel homeViewModel;
     private View root;
     private Banner banner;
     private List<PreViewGoods> hot = new ArrayList<>();
     private List<PreViewGoods> newest = new ArrayList<>();
-    private HomeFragment.MHandler mHandler = new HomeFragment.MHandler();
+    private HomeFragment.MHandler mHandler;
 
-    private class MHandler extends Handler {
+    static private class MHandler extends Handler {
+        private final WeakReference<HomeFragment> homeFragmentWeakReference;
+
+        public MHandler(HomeFragment homeFragment) {
+            homeFragmentWeakReference = new WeakReference<HomeFragment>(homeFragment);
+        }
+
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
@@ -49,9 +53,9 @@ public class HomeFragment extends Fragment {
                 String body = msg.obj.toString();
                 JSONArray hotSubGoods = JSONObject.parseObject(body).getJSONArray("data");
                 for (int i = 0; i < hotSubGoods.size(); i++) {
-                    hot.get(i).setTitle(hotSubGoods.getJSONObject(i).getString("title"));
-                    hot.get(i).setPrice(hotSubGoods.getJSONObject(i).getFloat("price"));
-                    hot.get(i).setImageUrl(hotSubGoods.getJSONObject(i).getString("img"));
+                    homeFragmentWeakReference.get().hot.get(i).setTitle(hotSubGoods.getJSONObject(i).getString("title"));
+                    homeFragmentWeakReference.get().hot.get(i).setPrice(hotSubGoods.getJSONObject(i).getFloat("price"));
+                    homeFragmentWeakReference.get().hot.get(i).setImageUrl(hotSubGoods.getJSONObject(i).getString("img"));
                 }
             }
 
@@ -60,10 +64,7 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
         root = inflater.inflate(R.layout.fragment_home, container, false);
-
         banner = root.findViewById(R.id.banner);
         banner.setOnBannerListener(new OnBannerListener() {
             @Override
@@ -72,6 +73,7 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        mHandler = new MHandler(this);
         this.LoadBannerImg();
         this.LoadHot();
         return root;
@@ -89,17 +91,17 @@ public class HomeFragment extends Fragment {
     }
 
     private void LoadBannerImg() {
-        ArrayList<Integer> imgs = new ArrayList<>();
-        imgs.add(R.drawable.goods_1);
-        imgs.add(R.drawable.goods_2);
-        imgs.add(R.drawable.goods_3);
+        ArrayList<Integer> img = new ArrayList<>();
+        img.add(R.drawable.goods_1);
+        img.add(R.drawable.goods_2);
+        img.add(R.drawable.goods_3);
 
         ArrayList<String> title = new ArrayList<>();
         title.add("奥利奥");
         title.add("趣多多");
         title.add("好多鱼");
 
-        banner.setImages(imgs);
+        banner.setImages(img);
         banner.setImageLoader(new ImageLoadBanner());
         banner.setBannerTitles(title);
         banner.setDelayTime(5500);
@@ -110,7 +112,7 @@ public class HomeFragment extends Fragment {
         banner.start();
     }
 
-    class ImageLoadBanner extends ImageLoader {
+    static class ImageLoadBanner extends ImageLoader {
         @Override
         public void displayImage(Context context, Object path, ImageView imageView) {
             imageView.setImageResource(Integer.parseInt(path.toString()));

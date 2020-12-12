@@ -12,6 +12,6 @@ public class Config {
     }
 
     public static String getServerAddress() {
-        return "http://10.51.184.211:7777";
+        return "http://m.bybyte.cn:7777";
     }
 }

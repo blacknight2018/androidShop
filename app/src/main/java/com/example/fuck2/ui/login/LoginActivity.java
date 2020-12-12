@@ -21,14 +21,21 @@ import com.example.fuck2.utils.ApiThread;
 import com.example.fuck2.utils.HttpRequest;
 import com.example.fuck2.utils.Utils;
 
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity {
 
 
-    private MHandler mHandler = new MHandler();
+    private MHandler mHandler;
 
-    private class MHandler extends Handler {
+    static private class MHandler extends Handler {
+        private final WeakReference<LoginActivity> loginActivityWeakReference;
+
+        public MHandler(LoginActivity loginActivity) {
+            loginActivityWeakReference = new WeakReference<LoginActivity>(loginActivity);
+        }
+
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
@@ -39,12 +46,15 @@ public class LoginActivity extends AppCompatActivity {
                     setCookie = response.getHeaders().get("Set-Cookie").get(0);
                 }
                 Config.setCookie(setCookie);
-                int code = JSONObject.parseObject(response.getBody()).getInteger("code");
-                if (code == Result.ErrCode.Ok.ordinal()) {
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(LoginActivity.this, Result.getMsg(code), Toast.LENGTH_SHORT).show();
+
+                if (null != JSONObject.parseObject(response.getBody())) {
+                    int code = JSONObject.parseObject(response.getBody()).getInteger("code");
+                    if (code == Result.ErrCode.Ok.ordinal()) {
+                        Intent intent = new Intent(loginActivityWeakReference.get(), MainActivity.class);
+                        loginActivityWeakReference.get().startActivity(intent);
+                    } else {
+                        Toast.makeText(loginActivityWeakReference.get(), Result.getMsg(code), Toast.LENGTH_SHORT).show();
+                    }
                 }
 
             }
@@ -66,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                 HashMap<String, String> hashMap = new HashMap<>();
                 hashMap.put("phone", phoneEditText.getText().toString());
                 hashMap.put("pass_word", passWordEditText.getText().toString());
+                mHandler = new MHandler(LoginActivity.this);
                 new ApiThread(0, mHandler, "post2", Config.getServerAddress() + "/v1/login", Utils.MapToHttpParam(hashMap)).start();
             }
         });

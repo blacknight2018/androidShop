@@ -24,9 +24,9 @@
             android:orientation="horizontal">
 
             <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/preview"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/avatar"
                 app:riv_corner_radius="10dp" />
 
             <LinearLayout
@@ -72,11 +72,21 @@
             android:layout_marginBottom="5dp"
             android:background="@android:color/darker_gray" />
 
-        <LinearLayout
-            android:id="@+id/spec_set"
+<!--        <LinearLayout-->
+<!--            android:id="@+id/spec_set"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical" />-->
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:layout_height="200dp">
+            <LinearLayout
+                android:id="@+id/spec_set"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </ScrollView>
 
         <TextView
             android:layout_width="match_parent"

@@ -3,6 +3,7 @@ package com.example.fuck2.ui;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -33,34 +34,51 @@ public class PopWinSelectSpecItem extends LinearLayout {
         return values;
     }
 
+    public void onChange(String title) {
+
+    }
+
     public void setValues(List<String> values) {
         this.values = values;
         RadioGroup radioGroup = findViewById(R.id.spec_set);
+        radioGroup.removeAllViews();
         for (int i = 0; i < values.size(); i++) {
-            RadioButton radioButton = (RadioButton) LayoutInflater.from(getContext()).inflate(R.layout.spec_btn, null);
+            final RadioButton radioButton = (RadioButton) LayoutInflater.from(getContext()).inflate(R.layout.spec_btn, null);
             radioButton.setText(values.get(i));
             radioButton.getLayoutParams();
+            radioButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onChange(radioButton.getText().toString());
+                }
+            });
             radioGroup.addView(radioButton);
+
         }
+    }
+
+
+    public void LoadLayout(Context context) {
+        LayoutInflater.from(context).inflate(R.layout.popwin_select_spec_item, this, true);
     }
 
     public PopWinSelectSpecItem(Context context) {
         super(context);
-        LayoutInflater.from(context).inflate(R.layout.popwin_select_spec_item, this, true);
+        LoadLayout(context);
     }
 
     public PopWinSelectSpecItem(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        LayoutInflater.from(context).inflate(R.layout.popwin_select_spec_item, this, true);
+        LoadLayout(context);
     }
 
     public PopWinSelectSpecItem(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        LayoutInflater.from(context).inflate(R.layout.popwin_select_spec_item, this, true);
+        LoadLayout(context);
     }
 
     public PopWinSelectSpecItem(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        LayoutInflater.from(context).inflate(R.layout.popwin_select_spec_item, this, true);
+        LoadLayout(context);
     }
 }

@@ -20,6 +20,16 @@ public class PopWinSelectSpecItem extends LinearLayout {
     private String title;
     private List<String> values;
 
+    public int getCurIdx() {
+        return curIdx;
+    }
+
+    public void setCurIdx(int curIdx) {
+        this.curIdx = curIdx;
+    }
+
+    private int curIdx;
+
     public String getTitle() {
         return title;
     }
@@ -34,8 +44,13 @@ public class PopWinSelectSpecItem extends LinearLayout {
         return values;
     }
 
-    public void onChange(String title) {
-
+    public void onChange(String title, int idx) {
+        RadioGroup radioGroup = findViewById(R.id.spec_set);
+        if (curIdx >= 0 && idx != curIdx) {
+            ((RadioButton) radioGroup.getChildAt(curIdx)).setChecked(false);
+            ((RadioButton) radioGroup.getChildAt(idx)).setChecked(true);
+            curIdx = idx;
+        }
     }
 
     public void setValues(List<String> values) {
@@ -46,15 +61,20 @@ public class PopWinSelectSpecItem extends LinearLayout {
             final RadioButton radioButton = (RadioButton) LayoutInflater.from(getContext()).inflate(R.layout.spec_btn, null);
             radioButton.setText(values.get(i));
             radioButton.getLayoutParams();
+            final int finalI = i;
             radioButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onChange(radioButton.getText().toString());
+                    onChange(radioButton.getText().toString(), finalI);
                 }
             });
+            if (i == curIdx) {
+                radioButton.setChecked(true);
+            }
             radioGroup.addView(radioButton);
-
         }
+
+
     }
 
 

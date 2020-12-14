@@ -3,6 +3,7 @@ package com.example.fuck2.ui;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,7 +25,7 @@ public class PreViewGoods extends LinearLayout {
     public void setPrice(float price) {
         this.price = price;
         TextView textView = findViewById(R.id.price);
-        textView.setText(String.valueOf(price)+"¥");
+        textView.setText(String.valueOf(price) + "¥");
     }
 
     public String getTitle() {
@@ -41,9 +42,15 @@ public class PreViewGoods extends LinearLayout {
         return imageUrl;
     }
 
+    /**
+     * 设置商品预览图
+     *
+     * @param imageUrl
+     */
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
         RoundedImageView imageView = findViewById(R.id.img);
+        imageView.setScaleType(ImageView.ScaleType.CENTER);
         Glide.with(getContext()).load(imageUrl).into(imageView);
     }
 

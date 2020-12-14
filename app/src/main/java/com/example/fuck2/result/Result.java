@@ -9,6 +9,7 @@ public class Result {
         UserExit,
         PassWordNotRight,
         UnKnow,
+        GoodsNotFound
     }
 
     public static HashMap<Integer, String> Msg = new HashMap<>();
@@ -19,7 +20,7 @@ public class Result {
         Msg.put(ErrCode.UserExit.ordinal(), "用户已存在");
         Msg.put(ErrCode.PassWordNotRight.ordinal(), "密码不正确");
         Msg.put(ErrCode.UnKnow.ordinal(), "未知错误");
-
+        Msg.put(ErrCode.GoodsNotFound.ordinal(), "找不到该商品");
         return Msg.get(code);
     }
 }

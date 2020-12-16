@@ -3,9 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backGroundSecond"
     android:orientation="vertical">
 
-    <ScrollView
+    <com.example.fuck2.ui.ScrollBottomScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="60dp"
@@ -14,44 +16,45 @@
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/cart_set"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.example.fuck2.ui.CartItem
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <!--            <com.example.fuck2.ui.CartItem-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content" />-->
 
-            <com.example.fuck2.ui.CartItem
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <!--            <com.example.fuck2.ui.CartItem-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content" />-->
 
-            <com.example.fuck2.ui.CartItem
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <!--            <com.example.fuck2.ui.CartItem-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content" />-->
 
-            <com.example.fuck2.ui.CartItem
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <!--            <com.example.fuck2.ui.CartItem-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content" />-->
 
-            <com.example.fuck2.ui.CartItem
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <!--            <com.example.fuck2.ui.CartItem-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content" />-->
 
-            <com.example.fuck2.ui.CartItem
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <!--            <com.example.fuck2.ui.CartItem-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content" />-->
 
-            <com.example.fuck2.ui.CartItem
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <!--            <com.example.fuck2.ui.CartItem-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content" />-->
 
-            <com.example.fuck2.ui.CartItem
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <!--            <com.example.fuck2.ui.CartItem-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content" />-->
         </LinearLayout>
 
-    </ScrollView>
+    </com.example.fuck2.ui.ScrollBottomScrollView>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -63,10 +66,10 @@
         app:layout_constraintLeft_toLeftOf="parent">
 
         <androidx.appcompat.widget.AppCompatCheckBox
-            android:id="@+id/appCompatCheckBox"
+            android:id="@+id/allChecked"
             android:layout_width="wrap_content"
-            android:buttonTint="@color/colorPrimary"
             android:layout_height="wrap_content"
+            android:buttonTint="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -79,7 +82,7 @@
             android:text="总价200￥"
             android:textSize="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/appCompatCheckBox"
+            app:layout_constraintStart_toEndOf="@+id/allChecked"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView

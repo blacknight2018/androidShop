@@ -36,11 +36,13 @@ public class SelectSpecPopWin extends PopupWindow {
     private final Context mContext;
     private final View view;
     private int curGoodsId;
+    private int curSubGoodsId;
     private final RoundedImageView preview;
     private final TextView titleTextView;
     private final TextView descTextView;
     private final TextView priceTextView;
     private final MHandler mHandler;
+    private final TextView addToCart;
     private final List<PopWinSelectSpecItem> popWinSelectSpecItemArrayList = new ArrayList<>();
 
     static private class MHandler extends Handler {
@@ -54,12 +56,8 @@ public class SelectSpecPopWin extends PopupWindow {
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
             int code = msg.what;
-            //Clear
-            Glide.with(winWeakReference.get().mContext).load("").into(winWeakReference.get().preview);
-            winWeakReference.get().titleTextView.setText("");
-            winWeakReference.get().descTextView.setText("");
-            winWeakReference.get().priceTextView.setText(String.valueOf(0) + "¥");
             if (0 == code) {
+                winWeakReference.get().clearCurGoodsShow();
                 String body = msg.obj.toString();
                 JSONObject jsonObject = JSONObject.parseObject(body);
                 if (jsonObject != null) {
@@ -72,6 +70,7 @@ public class SelectSpecPopWin extends PopupWindow {
                     winWeakReference.get().curGoodsId = data.getInteger("id");
                     winWeakReference.get().parseTemplate(template, subGoodsTemplate);
                     float price = data.getJSONObject("sub_goods").getFloat("price");
+                    winWeakReference.get().curSubGoodsId = data.getJSONObject("sub_goods").getInteger("id");
                     winWeakReference.get().titleTextView.setText(title);
                     winWeakReference.get().descTextView.setText(desc);
                     winWeakReference.get().priceTextView.setText(String.valueOf(price) + "¥");
@@ -79,12 +78,13 @@ public class SelectSpecPopWin extends PopupWindow {
                     Glide.with(winWeakReference.get().mContext).load(img).into(winWeakReference.get().preview);
                 }
             } else if (code == 1) {
+                winWeakReference.get().clearCurGoodsShow();
                 String body = msg.obj.toString();
                 JSONObject jsonObject = JSONObject.parseObject(body);
                 if (jsonObject != null) {
                     int retCode = jsonObject.getInteger("code");
                     JSONObject data = jsonObject.getJSONObject("data");
-                    if (data != null && retCode == 0) {
+                    if (data != null && retCode == Result.ErrCode.Ok.ordinal()) {
                         int subGoodsId = data.getInteger("id");
                         HashMap<String, String> param = new HashMap<>();
                         param.put("sub_goods_id", String.valueOf(subGoodsId));
@@ -94,9 +94,26 @@ public class SelectSpecPopWin extends PopupWindow {
 
                     }
                 }
+            } else if (code == 2) {
+                String body = msg.obj.toString();
+                JSONObject jsonObject = JSONObject.parseObject(body);
+                if (jsonObject != null) {
+                    System.out.println(jsonObject);
+                    int retCode = jsonObject.getInteger("code");
+                    if (retCode == Result.ErrCode.Ok.ordinal()) {
+                        Toast.makeText(winWeakReference.get().mContext, "添加成功", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         }
 
+    }
+
+    private void clearCurGoodsShow() {
+        Glide.with(mContext).load("").into(preview);
+        titleTextView.setText("");
+        descTextView.setText("");
+        priceTextView.setText(String.valueOf(0) + "¥");
     }
 
 
@@ -195,13 +212,25 @@ public class SelectSpecPopWin extends PopupWindow {
         // 设置弹出窗体显示时的动画，从底部向上弹出
         this.setAnimationStyle(R.style.select_spec_anim);
 
+        curSubGoodsId = subGoodsId;
+
         preview = view.findViewById(R.id.preview);
         titleTextView = view.findViewById(R.id.title);
         descTextView = view.findViewById(R.id.desc);
         priceTextView = view.findViewById(R.id.price);
+        addToCart = view.findViewById(R.id.add_to_cart);
+        addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HashMap<String, String> param = new HashMap<>();
+                param.put("sub_goods_id", String.valueOf(curSubGoodsId));
+                new ApiThread(2, mHandler, "post-c", Config.getServerAddress() + "/v1/cart", Utils.MapToHttpParam(param), Config.getCookie()).start();
+            }
+        });
 
         HashMap<String, String> param = new HashMap<>();
-        param.put("sub_goods_id", String.valueOf(subGoodsId));
+
+        param.put("sub_goods_id", String.valueOf(curSubGoodsId));
         mHandler = new MHandler(this);
         new ApiThread(0, mHandler, "get", Config.getServerAddress() + "/v1/goods", Utils.MapToHttpParam(param)).start();
 

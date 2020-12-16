@@ -15,6 +15,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/nick_name"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -52,12 +53,14 @@
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/men"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/colorPrimary"
                 android:text="@string/sex_man" />
 
             <RadioButton
+                android:id="@+id/female"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/colorPrimary"
@@ -72,6 +75,7 @@
         android:orientation="horizontal">
 
         <TextView
+
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -80,12 +84,12 @@
             android:textSize="20sp" />
 
         <EditText
+            android:id="@+id/phone"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="phone"
-            android:text="" />
+            android:inputType="phone" />
     </LinearLayout>
 
     <LinearLayout
@@ -103,11 +107,12 @@
             android:textSize="20sp" />
 
         <EditText
-            android:layout_width="0dp"
+            android:id="@+id/detail"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="top"
-            android:inputType="textMultiLine">
+            android:ems="10"
+            android:inputType="text">
 
         </EditText>
     </LinearLayout>
@@ -121,18 +126,20 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/submit"
             android:layout_width="250dp"
             android:layout_height="50dp"
-            android:background="@color/btn_submit"
+            android:background="@color/btn_submit2"
             android:text="@string/btn_submit"
             android:textColor="#ffffff" />
 
         <Button
+            android:id="@+id/delete"
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:background="@color/backGroundPrimary"
-            android:text="@string/btn_del"
             android:stateListAnimator="@null"
+            android:text="@string/btn_del"
             android:textColor="#ff0000" />
     </LinearLayout>
 </LinearLayout>

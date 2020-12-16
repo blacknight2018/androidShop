@@ -46,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
                     setCookie = response.getHeaders().get("Set-Cookie").get(0);
                 }
                 Config.setCookie(setCookie);
-
                 if (null != JSONObject.parseObject(response.getBody())) {
                     int code = JSONObject.parseObject(response.getBody()).getInteger("code");
                     if (code == Result.ErrCode.Ok.ordinal()) {

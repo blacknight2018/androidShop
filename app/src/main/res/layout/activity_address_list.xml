@@ -1,28 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backGroundPrimary"
-    android:orientation="vertical"
-    android:padding="@dimen/padding"
     tools:context=".AddressList">
 
-    <com.example.fuck2.ui.PreViewAddress
+
+    <com.example.fuck2.ui.ScrollBottomScrollView
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@color/backGroundSecond">
+        android:layout_height="match_parent"
+        android:paddingBottom="60dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    </com.example.fuck2.ui.PreViewAddress>
+        <LinearLayout
+            android:padding="@dimen/padding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <com.example.fuck2.ui.PreViewAddress
+            <com.example.fuck2.ui.PreViewAddress
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/backGroundSecond" />
+
+            <com.example.fuck2.ui.PreViewAddress
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/backGroundSecond" />
+
+            <com.example.fuck2.ui.PreViewAddress
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/backGroundSecond" />
+
+            <com.example.fuck2.ui.PreViewAddress
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/backGroundSecond" />
+
+            <com.example.fuck2.ui.PreViewAddress
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/backGroundSecond" />
+
+            <com.example.fuck2.ui.PreViewAddress
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/backGroundSecond" />
+
+            <com.example.fuck2.ui.PreViewAddress
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/backGroundSecond" />
+
+            <com.example.fuck2.ui.PreViewAddress
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/backGroundSecond" />
+
+            <com.example.fuck2.ui.PreViewAddress
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/backGroundSecond" />
+        </LinearLayout>
+    </com.example.fuck2.ui.ScrollBottomScrollView>
+
+    <TextView
+        android:id="@+id/add"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@color/backGroundSecond">
+        android:layout_height="60dp"
+        android:background="@color/btn_add"
+        android:gravity="center"
+        android:text="@string/btn_add"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
-    </com.example.fuck2.ui.PreViewAddress>
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

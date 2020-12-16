@@ -10,8 +10,8 @@
         android:id="@+id/select"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:checked="true"
         android:buttonTint="@color/colorPrimary"
+        android:checked="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -51,11 +51,12 @@
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <ImageView
-        android:id="@+id/plus"
+        android:id="@+id/minus"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginLeft="10dp"
         android:background="@drawable/minus"
+        android:clickable="true"
         app:layout_constraintLeft_toRightOf="@id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/desc" />
 
@@ -66,17 +67,18 @@
         android:ems="3"
         android:gravity="center"
         android:inputType="numberDecimal"
-        android:textStyle="bold"
         android:text="10"
         android:textSize="18dp"
-        app:layout_constraintLeft_toRightOf="@id/plus"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@id/minus"
         app:layout_constraintTop_toBottomOf="@+id/desc" />
 
     <ImageView
-        android:id="@+id/minus"
+        android:id="@+id/plus"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/plus"
+        android:clickable="true"
         app:layout_constraintLeft_toRightOf="@id/amount"
         app:layout_constraintTop_toBottomOf="@+id/desc" />
 

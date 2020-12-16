@@ -1,8 +1,14 @@
 package com.example.fuck2.utils;
 
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.methods.DeleteMethod;
+import org.apache.commons.httpclient.methods.EntityEnclosingMethod;
+import org.apache.commons.httpclient.methods.RequestEntity;
+import org.apache.commons.httpclient.methods.StringRequestEntity;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URL;
@@ -13,6 +19,50 @@ import java.util.Map;
 import static com.example.fuck2.utils.Utils.EmptyString;
 
 public class HttpRequest {
+    private static class DeleteMethodWithBody extends EntityEnclosingMethod {
+
+        @Override
+        public String getName() {
+            return "DELETE";
+        }
+
+        public DeleteMethodWithBody() {
+        }
+
+        public DeleteMethodWithBody(String uri) {
+            super(uri);
+        }
+    }
+
+    public static String doDelete(String url, String params, String Cookie) {
+        String responseString = EmptyString;
+        try {
+            if (params != null) {
+                DeleteMethodWithBody postMethod = new DeleteMethodWithBody(url + "?" + params);
+                RequestEntity se = new StringRequestEntity(params);
+                postMethod.setRequestEntity(se);
+                postMethod.setRequestHeader("cookie", Cookie);
+                HttpClient httpclient = new HttpClient();
+                httpclient.executeMethod(postMethod);
+                InputStream inputStream = postMethod.getResponseBodyAsStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+                StringBuilder stringBuffer = new StringBuilder();
+                String str = EmptyString;
+                while ((str = br.readLine()) != null) {
+                    stringBuffer.append(str);
+                }
+                responseString = stringBuffer.toString();
+            } else {
+                DeleteMethod d = new DeleteMethod(url);
+                HttpClient httpclient = new HttpClient();
+                httpclient.executeMethod(d);
+                responseString = d.getResponseBodyAsString();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return responseString;
+    }
 
     static String sendGet(String url, String param) {
         String result = EmptyString;

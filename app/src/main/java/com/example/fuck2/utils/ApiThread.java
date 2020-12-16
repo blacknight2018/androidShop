@@ -47,6 +47,10 @@ public class ApiThread extends Thread {
             message.obj = HttpRequest.sendPostWithMultiRes(url, param);
             handler.sendMessage(message);
             return;
+        } else if (method.toLowerCase().equals("delete-c")) {
+            message.obj = HttpRequest.doDelete(url, param, cookie);
+            handler.sendMessage(message);
+            return;
         }
         message.obj = ret;
         handler.sendMessage(message);

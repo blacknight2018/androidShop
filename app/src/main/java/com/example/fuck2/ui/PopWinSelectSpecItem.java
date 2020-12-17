@@ -78,27 +78,27 @@ public class PopWinSelectSpecItem extends LinearLayout {
     }
 
 
-    public void LoadLayout(Context context) {
+    public void loadLayout(Context context) {
         LayoutInflater.from(context).inflate(R.layout.popwin_select_spec_item, this, true);
     }
 
     public PopWinSelectSpecItem(Context context) {
         super(context);
-        LoadLayout(context);
+        loadLayout(context);
     }
 
     public PopWinSelectSpecItem(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        LoadLayout(context);
+        loadLayout(context);
     }
 
     public PopWinSelectSpecItem(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        LoadLayout(context);
+        loadLayout(context);
     }
 
     public PopWinSelectSpecItem(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        LoadLayout(context);
+        loadLayout(context);
     }
 }

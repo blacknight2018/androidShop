@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
@@ -32,7 +31,7 @@ public class NotificationsFragment extends Fragment {
         private final WeakReference<NotificationsFragment> notificationsFragmentWeakReference;
 
         public MHandler(NotificationsFragment notificationsFragment) {
-            notificationsFragmentWeakReference = new WeakReference<NotificationsFragment>(notificationsFragment);
+            notificationsFragmentWeakReference = new WeakReference<>(notificationsFragment);
         }
 
         @Override
@@ -57,7 +56,6 @@ public class NotificationsFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        NotificationsViewModel notificationsViewModel = ViewModelProviders.of(this).get(NotificationsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
 
         TextView view = root.findViewById(R.id.item_address);

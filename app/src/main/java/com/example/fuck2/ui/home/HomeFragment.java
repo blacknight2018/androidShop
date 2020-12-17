@@ -74,6 +74,7 @@ public class HomeFragment extends Fragment {
             }
         });
         mHandler = new MHandler(this);
+
         this.LoadBannerImg();
         this.LoadHot();
         return root;

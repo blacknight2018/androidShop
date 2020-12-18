@@ -2,6 +2,7 @@ package com.example.fuck2.ui.dashboard;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.example.fuck2.CreateOrder;
 import com.example.fuck2.R;
 import com.example.fuck2.config.Config;
 import com.example.fuck2.result.Result;
@@ -38,6 +40,7 @@ public class DashboardFragment extends Fragment {
     private LinearLayout linearLayout;
     private ScrollBottomScrollView scrollView;
     private TextView totalPriceTextView;
+    private TextView submitView;
     private MHandler mHandler;
     private int limit = 6, offset = 0;
     private AppCompatCheckBox allChecked;
@@ -104,12 +107,13 @@ public class DashboardFragment extends Fragment {
         totalPriceTextView.setText("总价" + total + "¥");
     }
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
+    public View onCreateView(@NonNull final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_dashboard, container, false);
         linearLayout = root.findViewById(R.id.cart_set);
         allChecked = root.findViewById(R.id.allChecked);
         scrollView = root.findViewById(R.id.scroll);
+        submitView = root.findViewById(R.id.submit);
         totalPriceTextView = root.findViewById(R.id.total_price);
         scrollView.registerOnScrollViewScrollToBottom(new ScrollBottomScrollView.OnScrollBottomListener() {
             @Override
@@ -126,6 +130,30 @@ public class DashboardFragment extends Fragment {
                 }
                 calcTotalPrice();
 
+            }
+        });
+        submitView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ArrayList<Integer> arrayList = new ArrayList<>();
+                for (int i = 0; i < cartItemList.size(); i++) {
+                    if (cartItemList.get(i).isChecked()) {
+                        arrayList.add(cartItemList.get(i).getCartId());
+                    }
+                }
+                int[] cartSet = new int[arrayList.size()];
+                for (int i = 0; i < cartSet.length; i++) {
+                    cartSet[i] = arrayList.get(i);
+                }
+
+//              HashMap<String, String> param = new HashMap<>();
+//              System.out.println(JSONArray.toJSONString(param));
+//              param.put("cart_id", JSONArray.toJSONString(param));
+
+                Intent intent = new Intent(getContext(), CreateOrder.class);
+                intent.putExtra("cart_id", JSONArray.toJSONString(cartSet));
+                startActivity(intent);
             }
         });
         cartStatusChange = new View.OnClickListener() {

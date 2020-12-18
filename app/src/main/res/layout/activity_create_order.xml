@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backGroundPrimary"
+    android:orientation="vertical"
+    tools:context=".CreateOrder">
+
+<!--    <com.example.fuck2.ui.PreViewAddress-->
+<!--        android:clickable="true"-->
+<!--        android:id="@+id/address"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content" />-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/cart_set"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/backGroundSecond"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+<!--            <com.example.fuck2.ui.CreateOrderCart-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="10dp" />-->
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/total_price"
+        android:background="@color/backGroundSecond"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="right"
+        android:text="100"
+        android:textColor="@color/price"
+        android:textSize="26sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/btn_submit2"
+        android:gravity="center"
+        android:text="@string/btn_submit"
+        android:textColor="#ffffff"
+        android:textSize="20dp" />
+</LinearLayout>

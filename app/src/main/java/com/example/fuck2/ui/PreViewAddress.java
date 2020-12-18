@@ -15,6 +15,18 @@ import com.example.fuck2.R;
 public class PreViewAddress extends LinearLayout {
     private int addressId;
     private String nick_name, detail, phone;
+    private ImageView editView;
+    private TextView phoneView;
+    private TextView detailView;
+    private TextView nameView;
+    private TextView tipsView;
+
+    public void hiddenEditIcon() {
+
+        editView.setVisibility(GONE);
+        LinearLayout linearLayout = findViewById(R.id.info_bar);
+        linearLayout.removeView(editView);
+    }
 
     public int getAddressId() {
         return addressId;
@@ -30,7 +42,6 @@ public class PreViewAddress extends LinearLayout {
 
     public void setNickName(String nick_name) {
         this.nick_name = nick_name;
-        TextView nameView = findViewById(R.id.nick_name);
         nameView.setText(nick_name);
     }
 
@@ -40,7 +51,6 @@ public class PreViewAddress extends LinearLayout {
 
     public void setDetail(String detail) {
         this.detail = detail;
-        TextView detailView = findViewById(R.id.detail);
         detailView.setText(detail);
     }
 
@@ -49,7 +59,6 @@ public class PreViewAddress extends LinearLayout {
     }
 
     public void setPhone(String phone) {
-        TextView phoneView = findViewById(R.id.phone);
         phoneView.setText(phone);
         this.phone = phone;
     }
@@ -62,9 +71,33 @@ public class PreViewAddress extends LinearLayout {
 
     }
 
+    /**
+     * 改变成选择提示
+     */
+    public void changeToSelectMode(boolean status) {
+        if (status) {
+            phoneView.setVisibility(INVISIBLE);
+            nameView.setVisibility(INVISIBLE);
+            detailView.setVisibility(INVISIBLE);
+            editView.setVisibility(INVISIBLE);
+            tipsView.setVisibility(VISIBLE);
+
+        } else {
+            phoneView.setVisibility(VISIBLE);
+            nameView.setVisibility(VISIBLE);
+            detailView.setVisibility(VISIBLE);
+            editView.setVisibility(VISIBLE);
+            tipsView.setVisibility(INVISIBLE);
+        }
+    }
+
     public void loadLayout(Context context) {
         LayoutInflater.from(context).inflate(R.layout.preview_address, this, true);
-        ImageView editView = findViewById(R.id.edit);
+        editView = findViewById(R.id.edit);
+        phoneView = findViewById(R.id.phone);
+        detailView = findViewById(R.id.detail);
+        nameView = findViewById(R.id.nick_name);
+        tipsView = findViewById(R.id.tips);
         LinearLayout linearLayout = findViewById(R.id.item);
         linearLayout.setOnClickListener(new OnClickListener() {
             @Override
@@ -83,6 +116,7 @@ public class PreViewAddress extends LinearLayout {
     public PreViewAddress(Context context) {
         super(context);
         loadLayout(context);
+        changeToSelectMode(false);
     }
 
     public PreViewAddress(Context context, @Nullable AttributeSet attrs) {

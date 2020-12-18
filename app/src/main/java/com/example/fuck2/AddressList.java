@@ -31,6 +31,7 @@ public class AddressList extends AppCompatActivity {
     private ScrollBottomScrollView scrollBottomScrollView;
     private int limit = 10, offset = 0;
 
+
     private class MHandler extends Handler {
         private WeakReference<AddressList> weakReference;
 
@@ -65,6 +66,13 @@ public class AddressList extends AppCompatActivity {
             @Override
             public void itemClick(String nick_name, String phone, String detail) {
                 super.itemClick(nick_name, phone, detail);
+                Intent intent = new Intent();
+                intent.putExtra("nick_name", nick_name);
+                intent.putExtra("phone", phone);
+                intent.putExtra("detail", detail);
+                intent.putExtra("address_id", getAddressId());
+                setResult(RESULT_OK, intent);
+                finish();
             }
 
             @Override

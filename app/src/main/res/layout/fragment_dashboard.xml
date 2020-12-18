@@ -86,6 +86,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/submit"
             android:layout_width="130dp"
             android:layout_height="match_parent"
             android:background="@color/btn_submit2"

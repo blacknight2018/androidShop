@@ -52,10 +52,12 @@
         android:textSize="26sp" />
 
     <TextView
+        android:id="@+id/submit"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/btn_submit2"
         android:gravity="center"
+        android:clickable="true"
         android:text="@string/btn_submit"
         android:textColor="#ffffff"
         android:textSize="20dp" />

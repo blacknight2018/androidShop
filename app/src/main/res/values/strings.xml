@@ -18,6 +18,8 @@
     <string name="btn_del">删除</string>
     <string name="activity_address_list">我的地址</string>
     <string name="activity_goods_detail">商品详细</string>
+    <string name="activity_create_order">创建订单</string>
+    <string name="activity_image_preview">图片预览</string>
     <string name="tip_spec">选择商品规格</string>
     <string name="btn_add_cart">添加到购物车</string>
     <string name="title_activity_login">Sign in</string>

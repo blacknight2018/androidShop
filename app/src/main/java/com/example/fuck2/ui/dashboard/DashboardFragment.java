@@ -89,6 +89,18 @@ public class DashboardFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        clearCart();
+        getCart();
+    }
+
+    public void clearCart() {
+        linearLayout.removeAllViews();
+        cartItemList.clear();
+    }
+
     public void getCart() {
         HashMap<String, String> param = new HashMap<>();
         param.put("limit", String.valueOf(limit));
@@ -167,8 +179,6 @@ public class DashboardFragment extends Fragment {
                 calcTotalPrice();
             }
         };
-
-        getCart();
         return root;
     }
 

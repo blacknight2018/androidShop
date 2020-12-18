@@ -1,5 +1,6 @@
 package com.example.fuck2;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,6 +24,7 @@ import com.example.fuck2.utils.Utils;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
 
 import java.lang.ref.WeakReference;
@@ -65,7 +67,7 @@ public class GoodsDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goods_detail);
         banner = findViewById(R.id.banner);
-
+        Utils.AllowFileSystemAccess(GoodsDetail.this, (Activity) GoodsDetail.this);
         //LoadBannerImg();
         titleTextView = findViewById(R.id.title);
         descTextView = findViewById(R.id.desc);
@@ -101,10 +103,20 @@ public class GoodsDetail extends AppCompatActivity {
             Glide.with(getApplicationContext()).load(imgPathList.get(i)).into(imageView);
             imageView.setLayoutParams(imgParam);
             imgSet.addView(imageView);
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    String localPath = Utils.ImageViewToLocalPath((ImageView) v, GoodsDetail.this);
+//                    Intent intent = new Intent(GoodsDetail.this, ImagePreview.class);
+//                    intent.putExtra("url", localPath);
+//                    startActivity(intent);
+                    Utils.PreviewImage((ImageView) v, GoodsDetail.this);
+                }
+            });
         }
     }
 
-    private void LoadBannerImg(List<String> imgPathList) {
+    private void LoadBannerImg(final List<String> imgPathList) {
         banner.setImages(imgPathList);
         banner.setImageLoader(new ImageLoadBanner());
         banner.setDelayTime(5500);
@@ -114,6 +126,12 @@ public class GoodsDetail extends AppCompatActivity {
         banner.setBannerAnimation(Transformer.Accordion);
         banner.setBannerStyle(BannerConfig.NUM_INDICATOR);
         banner.setIndicatorGravity(BannerConfig.CENTER);
+        banner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                Utils.PreviewImage(imgPathList.get(position), GoodsDetail.this);
+            }
+        });
         banner.start();
     }
 

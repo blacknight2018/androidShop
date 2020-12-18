@@ -102,6 +102,8 @@ public class SelectSpecPopWin extends PopupWindow {
                     int retCode = jsonObject.getInteger("code");
                     if (retCode == Result.ErrCode.Ok.ordinal()) {
                         Toast.makeText(winWeakReference.get().mContext, "添加成功", Toast.LENGTH_SHORT).show();
+
+                        winWeakReference.get().dismiss();
                     }
                 }
             }

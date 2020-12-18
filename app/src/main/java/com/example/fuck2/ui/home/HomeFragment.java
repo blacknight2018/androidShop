@@ -74,7 +74,6 @@ public class HomeFragment extends Fragment {
             }
         });
         mHandler = new MHandler(this);
-
         this.LoadBannerImg();
         this.LoadHot();
         return root;
@@ -110,6 +109,14 @@ public class HomeFragment extends Fragment {
         banner.setIndicatorGravity(BannerConfig.CENTER);
         banner.setBannerAnimation(Transformer.Accordion);
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
+//        banner.setOnBannerListener(new OnBannerListener() {
+//            @Override
+//            public void OnBannerClick(int position) {
+//                //Utils.ImageViewToLocalPath((ImageView) banner.getChildAt(position));
+//            }
+//
+//        });
+
         banner.start();
     }
 

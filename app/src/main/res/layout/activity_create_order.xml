@@ -8,11 +8,18 @@
     android:orientation="vertical"
     tools:context=".CreateOrder">
 
-<!--    <com.example.fuck2.ui.PreViewAddress-->
-<!--        android:clickable="true"-->
-<!--        android:id="@+id/address"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content" />-->
+    <!--    <com.example.fuck2.ui.PreViewAddress-->
+    <!--        android:clickable="true"-->
+    <!--        android:id="@+id/address"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content" />-->
+
+    <LinearLayout
+        android:background="@color/backGroundPrimary"
+        android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -26,19 +33,20 @@
             android:orientation="vertical"
             android:padding="10dp">
 
-<!--            <com.example.fuck2.ui.CreateOrderCart-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginBottom="10dp" />-->
+            <!--            <com.example.fuck2.ui.CreateOrderCart-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginBottom="10dp" />-->
         </LinearLayout>
     </ScrollView>
 
     <TextView
         android:id="@+id/total_price"
-        android:background="@color/backGroundSecond"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@color/backGroundSecond"
         android:gravity="right"
+        android:padding="10dp"
         android:text="100"
         android:textColor="@color/price"
         android:textSize="26sp" />

@@ -18,9 +18,20 @@ public class CreateOrderCart extends ConstraintLayout {
     private ImageView imageView;
     private TextView priceView;
     private TextView amountView;
+    private TextView titleView;
     private float price;
     private int amount;
     private String imageUrl;
+    private String title;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+        titleView.setText(title);
+    }
 
     public int getSubGoodsId() {
         return subGoodsId;
@@ -38,7 +49,7 @@ public class CreateOrderCart extends ConstraintLayout {
 
     public void setPrice(float price) {
         this.price = price;
-        priceView.setText(String.valueOf(price) + "¥" + "*" + String.valueOf(amount));
+        priceView.setText(String.valueOf(price) + "¥" );
     }
 
     public int getAmount() {
@@ -47,6 +58,7 @@ public class CreateOrderCart extends ConstraintLayout {
 
     public void setAmount(int amount) {
         this.amount = amount;
+        amountView.setText(" * " + String.valueOf(amount));
     }
 
     public String getImageUrl() {
@@ -63,6 +75,7 @@ public class CreateOrderCart extends ConstraintLayout {
         imageView = findViewById(R.id.img);
         priceView = findViewById(R.id.price);
         amountView = findViewById(R.id.amount);
+        titleView = findViewById(R.id.title);
     }
 
     public CreateOrderCart(@NonNull Context context) {

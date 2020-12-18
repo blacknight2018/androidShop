@@ -51,7 +51,7 @@
                     android:layout_height="80dp"
                     android:scaleType="center"
                     android:src="@drawable/hot_title"
-                    app:riv_corner_radius="5dp"
+                    app:riv_corner_radius="@dimen/radius"
                     app:riv_mutate_background="true"
                     app:riv_tile_mode="clamp" />
 

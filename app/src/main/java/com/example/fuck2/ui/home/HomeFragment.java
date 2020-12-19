@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.fuck2.GoodsDetail;
 import com.example.fuck2.R;
+import com.example.fuck2.SearchActivity;
 import com.example.fuck2.config.Config;
 import com.example.fuck2.ui.PreViewGoods;
 import com.example.fuck2.utils.ApiThread;
@@ -37,6 +39,7 @@ public class HomeFragment extends Fragment {
     private List<PreViewGoods> hot = new ArrayList<>();
     private List<PreViewGoods> newest = new ArrayList<>();
     private HomeFragment.MHandler mHandler;
+    private SearchView searchView;
 
     static private class MHandler extends Handler {
         private final WeakReference<HomeFragment> homeFragmentWeakReference;
@@ -66,11 +69,20 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_home, container, false);
         banner = root.findViewById(R.id.banner);
+        searchView = root.findViewById(R.id.search);
         banner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
                 Intent intent = new Intent(getContext(), GoodsDetail.class);
                 startActivity(intent);
+            }
+        });
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), SearchActivity.class);
+                startActivity(intent);
+
             }
         });
         mHandler = new MHandler(this);

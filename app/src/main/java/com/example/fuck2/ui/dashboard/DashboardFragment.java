@@ -91,12 +91,15 @@ public class DashboardFragment extends Fragment {
 
     @Override
     public void onStart() {
+
         super.onStart();
         clearCart();
         getCart();
     }
 
     public void clearCart() {
+        limit = 6;
+        offset = 0;
         linearLayout.removeAllViews();
         cartItemList.clear();
     }

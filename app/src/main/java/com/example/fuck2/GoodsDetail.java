@@ -65,10 +65,10 @@ public class GoodsDetail extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        subGoodsId = getIntent().getIntExtra("sub_goods_id", 3);
         setContentView(R.layout.activity_goods_detail);
         banner = findViewById(R.id.banner);
         Utils.AllowFileSystemAccess(GoodsDetail.this, (Activity) GoodsDetail.this);
-        //LoadBannerImg();
         titleTextView = findViewById(R.id.title);
         descTextView = findViewById(R.id.desc);
 

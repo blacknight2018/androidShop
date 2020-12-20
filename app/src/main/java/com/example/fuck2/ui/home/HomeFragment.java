@@ -82,9 +82,16 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), SearchActivity.class);
                 startActivity(intent);
-
             }
         });
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+        searchView.onActionViewCollapsed();
         mHandler = new MHandler(this);
         this.LoadBannerImg();
         this.LoadHot();

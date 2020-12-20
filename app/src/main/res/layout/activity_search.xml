@@ -1,16 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.flexbox.FlexboxLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backGroundPrimary"
+    app:flexDirection="column"
+    app:justifyContent="flex_start"
     tools:context=".SearchActivity">
 
     <SearchView
-        android:background="@color/backGroundSecond"
+        android:id="@+id/search"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/backGroundSecond"
+        android:defaultFocusHighlightEnabled="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:focusedByDefault="true"
+        android:queryHint="@string/search_tips"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="-16dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_flexShrink="0" />
+
+    <com.example.fuck2.ui.ScrollBottomScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search"
+        app:layout_flexGrow="1">
+
+        <LinearLayout
+            android:id="@+id/result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+<!--            <com.example.fuck2.ui.SearchGoodsView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content" />-->
+
+<!--            <com.example.fuck2.ui.SearchGoodsView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content" />-->
+
+<!--            <com.example.fuck2.ui.SearchGoodsView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content" />-->
+
+<!--            <com.example.fuck2.ui.SearchGoodsView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content" />-->
+
+<!--            <com.example.fuck2.ui.SearchGoodsView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content" />-->
+
+
+        </LinearLayout>
+    </com.example.fuck2.ui.ScrollBottomScrollView>
+
+
+</com.google.android.flexbox.FlexboxLayout>

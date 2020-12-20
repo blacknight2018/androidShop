@@ -34,4 +34,5 @@
     <string name="login_failed">登录失败</string>
     <string name="select_address">请选择收货地址</string>
     <string name="search_tips">点我搜索</string>
+    <string name="not_found">找不到,换个关键字试试呗</string>
 </resources>

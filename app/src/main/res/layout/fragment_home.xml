@@ -11,7 +11,8 @@
     <SearchView
         android:id="@+id/search"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:queryHint="@string/search_tips"
+        android:layout_height="wrap_content"
         app:layout_flexShrink="0" />
 
 

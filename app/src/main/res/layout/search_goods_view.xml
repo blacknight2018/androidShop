@@ -4,6 +4,8 @@
     android:id="@+id/main_view"
     android:paddingBottom="5dp"
     android:paddingTop="5dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
     android:layout_width="match_parent"
     android:background="@color/backGroundSecond"
     android:clickable="true"
@@ -26,7 +28,7 @@
         android:layout_marginStart="20dp"
         android:text="Test"
         android:textColor="#000000"
-        android:textSize="26sp"
+        android:textSize="20sp"
         app:layout_constraintLeft_toRightOf="@id/img"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:text="Desc"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintLeft_toRightOf="@id/img"
         app:layout_constraintTop_toBottomOf="@id/title" />
 

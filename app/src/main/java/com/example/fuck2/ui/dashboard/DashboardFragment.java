@@ -1,6 +1,7 @@
 package com.example.fuck2.ui.dashboard;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -45,6 +46,7 @@ public class DashboardFragment extends Fragment {
     private int limit = 6, offset = 0;
     private AppCompatCheckBox allChecked;
     private View.OnClickListener cartStatusChange;
+    private AlertDialog waitDialog;
 
 
     static private class MHandler extends Handler {
@@ -76,7 +78,6 @@ public class DashboardFragment extends Fragment {
                             weakReference.get().addOneCart(cartId, imageUrl, false, desc, title, amount, price);
                         }
                         weakReference.get().offset += data.size();
-
                     }
                 }
             } else if (1 == msg.what) {
@@ -86,6 +87,7 @@ public class DashboardFragment extends Fragment {
                     Toast.makeText(weakReference.get().getContext(), "移除成功", Toast.LENGTH_SHORT).show();
                 }
             }
+            weakReference.get().waitDialog.cancel();
         }
     }
 
@@ -109,6 +111,10 @@ public class DashboardFragment extends Fragment {
         param.put("limit", String.valueOf(limit));
         param.put("offset", String.valueOf(offset));
         mHandler = new MHandler(DashboardFragment.this);
+        waitDialog.setTitle("加载中");
+        waitDialog.setMessage("搜索中");
+        waitDialog.create();
+        waitDialog.show();
         new ApiThread(0, mHandler, "get-c", Config.getServerAddress() + "/v1/cart", Utils.MapToHttpParam(param), Config.getCookie()).start();
     }
 
@@ -125,6 +131,7 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(@NonNull final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        waitDialog = new ProgressDialog(getContext());
         linearLayout = root.findViewById(R.id.cart_set);
         allChecked = root.findViewById(R.id.allChecked);
         scrollView = root.findViewById(R.id.scroll);

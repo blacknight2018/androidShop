@@ -34,7 +34,6 @@
         <activity
             android:name=".GoodsDetail"
             android:label="@string/activity_goods_detail"
-            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".AddressList"

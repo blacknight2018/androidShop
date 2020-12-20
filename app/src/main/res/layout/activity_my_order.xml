@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backGroundPrimary"
+    android:orientation="vertical">
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/backGroundSecond"
+        android:orientation="horizontal">
+        <RadioButton
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/btn_1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:checked="true"
+            android:button="@null"
+            android:text="@string/title_all"
+            android:textColor="@drawable/order_menu_item"
+            android:textSize="16sp" />
+        <RadioButton
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/btn_2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:button="@null"
+            android:text="@string/title_pay_order"
+            android:textColor="@drawable/order_menu_item"
+            android:textSize="16sp" />
+        <RadioButton
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/btn_3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:button="@null"
+            android:text="@string/title_not_pay_order"
+            android:textColor="@drawable/order_menu_item"
+            android:textSize="16sp" />
+        <RadioButton
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/btn_4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:button="@null"
+            android:text="@string/title_delivery"
+            android:textColor="@drawable/order_menu_item"
+            android:textSize="16sp" />
+        <RadioButton
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/btn_5"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:button="@null"
+            android:text="@string/title_not_delivery"
+            android:textColor="@drawable/order_menu_item"
+            android:textSize="16sp" />
+    </RadioGroup>
+</LinearLayout>

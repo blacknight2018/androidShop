@@ -31,7 +31,8 @@ public class SearchActivity extends AppCompatActivity {
     private SearchView searchView;
     private ProgressDialog waitDialog;
     private MHandler mHandler;
-    private int limit = 6, offset = 0;
+    private final int maxLimit = 7;
+    private int limit = maxLimit, offset = 0;
     private LinearLayout resultLayout;
     private List<SearchGoodsView> searchGoodsViewList;
     private TextView foundTipView;
@@ -148,7 +149,7 @@ public class SearchActivity extends AppCompatActivity {
                 waitDialog.setMessage("搜索中");
                 waitDialog.create();
                 waitDialog.show();
-                limit = 6;
+                limit = maxLimit;
                 offset = 0;
                 HashMap<String, String> param = new HashMap<>();
                 param.put("key", query);

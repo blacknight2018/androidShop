@@ -1,5 +1,7 @@
 package com.example.fuck2.ui.notifications;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
 import com.example.fuck2.AddressList;
+import com.example.fuck2.MyOrderActivity;
 import com.example.fuck2.R;
 import com.example.fuck2.config.Config;
 import com.example.fuck2.utils.ApiThread;
@@ -26,6 +29,7 @@ import java.lang.ref.WeakReference;
 public class NotificationsFragment extends Fragment {
     private RoundedImageView avatarImgView;
     private TextView nickNameTextView;
+    private AlertDialog waitDialog;
 
     static private class MHandler extends Handler {
         private final WeakReference<NotificationsFragment> notificationsFragmentWeakReference;
@@ -49,8 +53,9 @@ public class NotificationsFragment extends Fragment {
                     Glide.with(context).load(avatarUrl).into(notificationsFragmentWeakReference.get().avatarImgView);
                 }
                 notificationsFragmentWeakReference.get().nickNameTextView.setText(nickName);
-            }
 
+            }
+            notificationsFragmentWeakReference.get().waitDialog.cancel();
         }
     }
 
@@ -58,8 +63,8 @@ public class NotificationsFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
 
-        TextView view = root.findViewById(R.id.item_address);
-        view.setOnClickListener(new View.OnClickListener() {
+        TextView addressItemView = root.findViewById(R.id.item_address);
+        addressItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
@@ -67,10 +72,23 @@ public class NotificationsFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        TextView orderItemView = root.findViewById(R.id.item_order);
+        orderItemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), MyOrderActivity.class);
+                startActivity(intent);
+            }
+        });
 
         avatarImgView = root.findViewById(R.id.avatar);
         nickNameTextView = root.findViewById(R.id.nick_name);
         MHandler mHandler = new MHandler(this);
+        waitDialog = new ProgressDialog(getContext());
+        waitDialog.setTitle("加载中");
+        waitDialog.setMessage("加载个人信息中");
+        waitDialog.create();
+        waitDialog.show();
         new ApiThread(0, mHandler, "get-c", Config.getServerAddress() + "/v1/user", "", Config.getCookie()).start();
         return root;
     }

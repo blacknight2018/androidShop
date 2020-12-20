@@ -112,7 +112,7 @@ public class DashboardFragment extends Fragment {
         param.put("offset", String.valueOf(offset));
         mHandler = new MHandler(DashboardFragment.this);
         waitDialog.setTitle("加载中");
-        waitDialog.setMessage("搜索中");
+        waitDialog.setMessage("加载购物车列表中");
         waitDialog.create();
         waitDialog.show();
         new ApiThread(0, mHandler, "get-c", Config.getServerAddress() + "/v1/cart", Utils.MapToHttpParam(param), Config.getCookie()).start();

@@ -44,6 +44,27 @@ public class SelectSpecPopWin extends PopupWindow {
     private final MHandler mHandler;
     private final TextView addToCart;
     private final List<PopWinSelectSpecItem> popWinSelectSpecItemArrayList = new ArrayList<>();
+    private int sell, stoke;
+
+    public int getSell() {
+        return sell;
+    }
+
+    public void setSell(int sell) {
+        this.sell = sell;
+        TextView sellView = view.findViewById(R.id.sell);
+        sellView.setText(String.valueOf(sell));
+    }
+
+    public int getStoke() {
+        return stoke;
+    }
+
+    public void setStoke(int stoke) {
+        this.stoke = stoke;
+        TextView stokeView = view.findViewById(R.id.stoke);
+        stokeView.setText(String.valueOf(stoke));
+    }
 
     static private class MHandler extends Handler {
         private final WeakReference<SelectSpecPopWin> winWeakReference;
@@ -67,6 +88,8 @@ public class SelectSpecPopWin extends PopupWindow {
                     String img = data.getJSONObject("sub_goods").getString("img");
                     String subGoodsTemplate = data.getJSONObject("sub_goods").getString("template");
                     String template = data.getString("template");
+                    int sell = data.getJSONObject("sub_goods").getIntValue("sell");
+                    int stoke = data.getJSONObject("sub_goods").getIntValue("stoke");
                     winWeakReference.get().curGoodsId = data.getInteger("id");
                     winWeakReference.get().parseTemplate(template, subGoodsTemplate);
                     float price = data.getJSONObject("sub_goods").getFloat("price");
@@ -75,6 +98,8 @@ public class SelectSpecPopWin extends PopupWindow {
                     winWeakReference.get().descTextView.setText(desc);
                     winWeakReference.get().priceTextView.setText(String.valueOf(price) + "¥");
                     winWeakReference.get().preview.setScaleType(ImageView.ScaleType.CENTER);
+                    winWeakReference.get().setSell(sell);
+                    winWeakReference.get().setStoke(stoke);
                     Glide.with(winWeakReference.get().mContext).load(img).into(winWeakReference.get().preview);
                 }
             } else if (code == 1) {
@@ -115,6 +140,8 @@ public class SelectSpecPopWin extends PopupWindow {
         Glide.with(mContext).load("").into(preview);
         titleTextView.setText("");
         descTextView.setText("");
+        setStoke(0);
+        setSell(0);
         priceTextView.setText(String.valueOf(0) + "¥");
     }
 

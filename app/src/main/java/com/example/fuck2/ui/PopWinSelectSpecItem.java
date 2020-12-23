@@ -20,6 +20,7 @@ public class PopWinSelectSpecItem extends LinearLayout {
     private String title;
     private List<String> values;
 
+
     public int getCurIdx() {
         return curIdx;
     }

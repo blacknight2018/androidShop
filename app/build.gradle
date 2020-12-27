@@ -42,6 +42,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
-    implementation files('libs\\BaiduLBS_Android.jar')
     implementation files('libs\\glide-full-4.7.0.jar')
 }

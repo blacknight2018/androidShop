@@ -38,7 +38,7 @@ public class MyOrderActivity extends AppCompatActivity {
     private MHandler mHandler;
 
     private enum Status {
-        All, UnPay, Pay, UnDelivery, Delivery
+        UnPay, Pay, UnDelivery, Delivery, All
     }
 
     private class MHandler extends Handler {
@@ -124,7 +124,7 @@ public class MyOrderActivity extends AppCompatActivity {
         radioButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                status = 0;
+                status = Status.All.ordinal();
                 clear();
                 request();
             }

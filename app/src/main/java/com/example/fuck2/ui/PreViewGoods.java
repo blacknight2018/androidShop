@@ -17,6 +17,26 @@ public class PreViewGoods extends LinearLayout {
     private float price;
     private String title;
     private String imageUrl;
+    private int subGoodsId;
+    private OnClickListener clickListener;
+
+    public int getSubGoodsId() {
+        return subGoodsId;
+    }
+
+    public void setSubGoodsId(int subGoodsId) {
+        this.subGoodsId = subGoodsId;
+    }
+
+    public OnClickListener getClickListener() {
+        return clickListener;
+    }
+
+    public void setClickListener(OnClickListener clickListener) {
+        this.clickListener = clickListener;
+        RoundedImageView imageView = findViewById(R.id.img);
+        imageView.setOnClickListener(clickListener);
+    }
 
     public float getPrice() {
         return price;
@@ -25,7 +45,7 @@ public class PreViewGoods extends LinearLayout {
     public void setPrice(float price) {
         this.price = price;
         TextView textView = findViewById(R.id.price);
-        textView.setText(String.valueOf(price) + "¥");
+        textView.setText(price + "¥");
     }
 
     public String getTitle() {
@@ -42,11 +62,7 @@ public class PreViewGoods extends LinearLayout {
         return imageUrl;
     }
 
-    /**
-     * 设置商品预览图
-     *
-     * @param imageUrl
-     */
+
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
         RoundedImageView imageView = findViewById(R.id.img);

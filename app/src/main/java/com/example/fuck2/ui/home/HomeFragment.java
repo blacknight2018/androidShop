@@ -52,13 +52,20 @@ public class HomeFragment extends Fragment {
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
             int code = msg.what;
-            if (code == 0) {
+            if (code == 0 || code == 1) {
                 String body = msg.obj.toString();
-                JSONArray hotSubGoods = JSONObject.parseObject(body).getJSONArray("data");
-                for (int i = 0; i < hotSubGoods.size(); i++) {
-                    homeFragmentWeakReference.get().hot.get(i).setTitle(hotSubGoods.getJSONObject(i).getString("title"));
-                    homeFragmentWeakReference.get().hot.get(i).setPrice(hotSubGoods.getJSONObject(i).getFloat("price"));
-                    homeFragmentWeakReference.get().hot.get(i).setImageUrl(hotSubGoods.getJSONObject(i).getString("img"));
+                JSONArray data = JSONObject.parseObject(body).getJSONArray("data");
+                List<PreViewGoods> obj = null;
+                if (code == 0) {
+                    obj = homeFragmentWeakReference.get().hot;
+                } else {
+                    obj = homeFragmentWeakReference.get().newest;
+                }
+                for (int i = 0; i < obj.size(); i++) {
+                    obj.get(i).setTitle(data.getJSONObject(i).getString("title"));
+                    obj.get(i).setPrice(data.getJSONObject(i).getFloat("price"));
+                    obj.get(i).setImageUrl(data.getJSONObject(i).getString("img"));
+                    obj.get(i).setSubGoodsId(data.getJSONObject(i).getIntValue("id"));
                 }
             }
 
@@ -95,6 +102,7 @@ public class HomeFragment extends Fragment {
         mHandler = new MHandler(this);
         this.LoadBannerImg();
         this.LoadHot();
+        this.LoadNewest();
         return root;
     }
 
@@ -106,7 +114,40 @@ public class HomeFragment extends Fragment {
         hot.add((PreViewGoods) root.findViewById(R.id.hot_4));
         hot.add((PreViewGoods) root.findViewById(R.id.hot_5));
         hot.add((PreViewGoods) root.findViewById(R.id.hot_6));
+        for (int i = 0; i < hot.size(); i++) {
+            final int finalI = i;
+            hot.get(i).setClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), GoodsDetail.class);
+                    intent.putExtra("sub_goods_id", hot.get(finalI).getSubGoodsId());
+                    startActivity(intent);
+                }
+            });
+        }
         new ApiThread(0, mHandler, "get", Config.getServerAddress() + "/v1/home/hot", Utils.EmptyString).start();
+    }
+
+    private void LoadNewest() {
+        newest.clear();
+        newest.add((PreViewGoods) root.findViewById(R.id.newest_1));
+        newest.add((PreViewGoods) root.findViewById(R.id.newest_2));
+        newest.add((PreViewGoods) root.findViewById(R.id.newest_3));
+        newest.add((PreViewGoods) root.findViewById(R.id.newest_4));
+        newest.add((PreViewGoods) root.findViewById(R.id.newest_5));
+        newest.add((PreViewGoods) root.findViewById(R.id.newest_6));
+        for (int i = 0; i < newest.size(); i++) {
+            final int finalI = i;
+            newest.get(i).setClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), GoodsDetail.class);
+                    intent.putExtra("sub_goods_id", newest.get(finalI).getSubGoodsId());
+                    startActivity(intent);
+                }
+            });
+        }
+        new ApiThread(1, mHandler, "get", Config.getServerAddress() + "/v1/home/newest", Utils.EmptyString).start();
     }
 
     private void LoadBannerImg() {

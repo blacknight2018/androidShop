@@ -34,7 +34,7 @@ import java.util.List;
 public class GoodsDetail extends AppCompatActivity {
     private Banner banner;
     private int subGoodsId = 3;
-    private TextView titleTextView, descTextView;
+    private TextView titleTextView, descTextView, priceTextView, sellTextView;
 
     static private class MHandler extends Handler {
         private final WeakReference<GoodsDetail> weakReference;
@@ -53,9 +53,13 @@ public class GoodsDetail extends AppCompatActivity {
                 String title = JSONObject.parseObject(body).getJSONObject("data").getString("title");
                 String desc = JSONObject.parseObject(body).getJSONObject("data").getString("desc");
                 String img = JSONObject.parseObject(body).getJSONObject("data").getString("banner");
+                String sell = JSONObject.parseObject(body).getJSONObject("data").getString("sell");
+                String price = JSONObject.parseObject(body).getJSONObject("data").getString("price");
                 String detailImg = JSONObject.parseObject(body).getJSONObject("data").getString("detail_img");
                 weakReference.get().titleTextView.setText(title);
                 weakReference.get().descTextView.setText(desc);
+                weakReference.get().priceTextView.setText(price + "¥");
+                weakReference.get().sellTextView.setText("已卖 " + sell);
                 weakReference.get().LoadBannerImg(Utils.ParseJSONString(img));
                 weakReference.get().LoadDetailImg(Utils.ParseJSONString(detailImg));
             }
@@ -71,6 +75,8 @@ public class GoodsDetail extends AppCompatActivity {
         Utils.AllowFileSystemAccess(GoodsDetail.this, (Activity) GoodsDetail.this);
         titleTextView = findViewById(R.id.title);
         descTextView = findViewById(R.id.desc);
+        priceTextView = findViewById(R.id.price);
+        sellTextView = findViewById(R.id.sell);
 
         RelativeLayout textView = findViewById(R.id.select_spec);
 

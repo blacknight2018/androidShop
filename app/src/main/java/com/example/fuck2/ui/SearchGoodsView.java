@@ -20,6 +20,18 @@ public class SearchGoodsView extends ConstraintLayout {
     private String title;
     private String desc;
     private String imgUrl;
+    private String price;
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+        TextView priceView = findViewById(R.id.price);
+        priceView.setText(price +"¥");
+    }
+
     private ArrayList<Integer> subGoodsArray;
 
     public ArrayList<Integer> getSubGoodsArray() {

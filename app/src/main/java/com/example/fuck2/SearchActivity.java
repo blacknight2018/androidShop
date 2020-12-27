@@ -53,6 +53,7 @@ public class SearchActivity extends AppCompatActivity {
                         JSONObject goods = dataArray.getJSONObject(i);
                         String title = goods.getString("title");
                         String desc = goods.getString("desc");
+                        String price = goods.getString("price");
                         JSONArray bannerJsonArray = goods.getJSONArray("banner");
                         JSONArray subGoodsJsonArray = goods.getJSONArray("sub_goods");
                         ArrayList<Integer> subGoodsArray = new ArrayList<>();
@@ -63,7 +64,7 @@ public class SearchActivity extends AppCompatActivity {
                         if (bannerJsonArray.size() > 0) {
                             imgUrl = bannerJsonArray.getString(0);
                         }
-                        weakReference.get().addGoods(title, desc, imgUrl, subGoodsArray);
+                        weakReference.get().addGoods(title, price, desc, imgUrl, subGoodsArray);
                     }
                     if (dataArray != null) {
                         offset += dataArray.size();
@@ -83,7 +84,7 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-    public void addGoods(String title, String desc, String imgUrl, ArrayList<Integer> subGoodsArray) {
+    public void addGoods(String title, String price, String desc, String imgUrl, ArrayList<Integer> subGoodsArray) {
         SearchGoodsView searchGoodsView = new SearchGoodsView(SearchActivity.this) {
             @Override
             public void itemClick(ArrayList<Integer> subGoodsArray) {
@@ -98,6 +99,7 @@ public class SearchActivity extends AppCompatActivity {
         };
         searchGoodsView.setDesc(desc);
         searchGoodsView.setTitle(title);
+        searchGoodsView.setPrice(price);
         searchGoodsView.setImgUrl(imgUrl);
         searchGoodsView.setSubGoodsArray(subGoodsArray);
         searchGoodsViewList.add(searchGoodsView);

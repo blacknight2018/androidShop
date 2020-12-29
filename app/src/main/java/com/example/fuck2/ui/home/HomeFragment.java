@@ -157,9 +157,9 @@ public class HomeFragment extends Fragment {
         img.add(R.drawable.goods_3);
 
         ArrayList<String> title = new ArrayList<>();
-        title.add("奥利奥");
-        title.add("趣多多");
-        title.add("好多鱼");
+        title.add("");
+        title.add("");
+        title.add("");
 
         banner.setImages(img);
         banner.setImageLoader(new ImageLoadBanner());
@@ -168,15 +168,7 @@ public class HomeFragment extends Fragment {
         banner.isAutoPlay(true);
         banner.setIndicatorGravity(BannerConfig.CENTER);
         banner.setBannerAnimation(Transformer.Accordion);
-        banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
-//        banner.setOnBannerListener(new OnBannerListener() {
-//            @Override
-//            public void OnBannerClick(int position) {
-//                //Utils.ImageViewToLocalPath((ImageView) banner.getChildAt(position));
-//            }
-//
-//        });
-
+        banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         banner.start();
     }
 

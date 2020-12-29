@@ -60,7 +60,7 @@ public class MyOrderActivity extends AppCompatActivity {
                         JSONArray imgArray = itemObject.getJSONArray("img");
 
                         ArrayList<String> imgList = new ArrayList<>();
-                        for (int j = 0; j < imgArray.size(); j++) {
+                        for (int j = 0; imgArray != null && !imgArray.isEmpty() && j < imgArray.size(); j++) {
                             imgList.add(imgArray.getString(j));
                         }
                         weakReference.get().offset++;

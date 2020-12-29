@@ -29,6 +29,7 @@ import java.lang.ref.WeakReference;
 public class NotificationsFragment extends Fragment {
     private RoundedImageView avatarImgView;
     private TextView nickNameTextView;
+    private TextView phoneTextView;
     private AlertDialog waitDialog;
 
     static private class MHandler extends Handler {
@@ -48,11 +49,13 @@ public class NotificationsFragment extends Fragment {
                 System.out.println(body);
                 String avatarUrl = JSONObject.parseObject(body).getJSONObject("data").getString("avatar");
                 String nickName = JSONObject.parseObject(body).getJSONObject("data").getString("nick_name");
+                String phone = JSONObject.parseObject(body).getJSONObject("data").getString("phone");
                 Context context = notificationsFragmentWeakReference.get().getContext();
                 if (null != context) {
                     Glide.with(context).load(avatarUrl).into(notificationsFragmentWeakReference.get().avatarImgView);
                 }
                 notificationsFragmentWeakReference.get().nickNameTextView.setText(nickName);
+                notificationsFragmentWeakReference.get().phoneTextView.setText(phone);
 
             }
             notificationsFragmentWeakReference.get().waitDialog.cancel();
@@ -83,6 +86,7 @@ public class NotificationsFragment extends Fragment {
 
         avatarImgView = root.findViewById(R.id.avatar);
         nickNameTextView = root.findViewById(R.id.nick_name);
+        phoneTextView = root.findViewById(R.id.phone);
         MHandler mHandler = new MHandler(this);
         waitDialog = new ProgressDialog(getContext());
         waitDialog.setTitle("加载中");

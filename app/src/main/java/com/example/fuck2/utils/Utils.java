@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
@@ -104,6 +105,19 @@ public class Utils {
             return null;
         }
         return retPath;
+    }
+
+
+    public static void WritePreferences(Context context, String key, String value) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("data", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
+
+    public static String ReadPreference(Context context, String key) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("data", Context.MODE_PRIVATE);
+        return sharedPreferences.getString(key, EmptyString);
     }
 
     public static void main(String[] args) {

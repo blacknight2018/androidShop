@@ -6,6 +6,7 @@
     <string name="title_address">我的地址</string>
     <string name="title_order">我的订单</string>
     <string name="title_setting">设置</string>
+    <string name="title_exit">退出</string>
     <string name="title_hot">最热商品</string>
     <string name="title_newest">最新商品</string>
     <string name="title_name">姓名</string>

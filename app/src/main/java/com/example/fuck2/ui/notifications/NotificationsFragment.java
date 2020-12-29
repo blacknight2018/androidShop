@@ -18,10 +18,12 @@ import androidx.fragment.app.Fragment;
 import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
 import com.example.fuck2.AddressList;
+import com.example.fuck2.MainActivity;
 import com.example.fuck2.MyOrderActivity;
 import com.example.fuck2.R;
 import com.example.fuck2.config.Config;
 import com.example.fuck2.utils.ApiThread;
+import com.example.fuck2.utils.Utils;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.lang.ref.WeakReference;
@@ -65,7 +67,7 @@ public class NotificationsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
-
+        final MainActivity mainActivity = (MainActivity) getContext();
         TextView addressItemView = root.findViewById(R.id.item_address);
         addressItemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +83,16 @@ public class NotificationsFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), MyOrderActivity.class);
                 startActivity(intent);
+            }
+        });
+        TextView exitItemView = root.findViewById(R.id.item_exit);
+        exitItemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Clear Cookie Token
+                Utils.WritePreferences(mainActivity, "Cookie", Utils.EmptyString);
+                mainActivity.finish();
+
             }
         });
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
                 String setCookie = Utils.EmptyString;
                 if (response.getHeaders() != null && response.getHeaders().get("Set-Cookie") != null && response.getHeaders().get("Set-Cookie").size() > 0) {
                     setCookie = response.getHeaders().get("Set-Cookie").get(0);
+                    Utils.WritePreferences(loginActivityWeakReference.get(), "Cookie", setCookie);
                 }
                 Config.setCookie(setCookie);
                 if (null != JSONObject.parseObject(response.getBody())) {
@@ -69,6 +71,12 @@ public class LoginActivity extends AppCompatActivity {
         final EditText phoneEditText = findViewById(R.id.phone);
         final EditText passWordEditText = findViewById(R.id.password);
         Button loginRegister = findViewById(R.id.login);
+        String loginCookie = Utils.ReadPreference(LoginActivity.this, "Cookie");
+        if (!loginCookie.isEmpty()) {
+            Config.setCookie(loginCookie);
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
         loginRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

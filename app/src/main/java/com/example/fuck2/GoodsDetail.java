@@ -50,18 +50,21 @@ public class GoodsDetail extends AppCompatActivity {
             int code = msg.what;
             if (code == 0) {
                 String body = msg.obj.toString();
-                String title = JSONObject.parseObject(body).getJSONObject("data").getString("title");
-                String desc = JSONObject.parseObject(body).getJSONObject("data").getString("desc");
-                String img = JSONObject.parseObject(body).getJSONObject("data").getString("banner");
-                String sell = JSONObject.parseObject(body).getJSONObject("data").getString("sell");
-                String price = JSONObject.parseObject(body).getJSONObject("data").getString("price");
-                String detailImg = JSONObject.parseObject(body).getJSONObject("data").getString("detail_img");
-                weakReference.get().titleTextView.setText(title);
-                weakReference.get().descTextView.setText(desc);
-                weakReference.get().priceTextView.setText(price + "¥");
-                weakReference.get().sellTextView.setText("已卖 " + sell);
-                weakReference.get().LoadBannerImg(Utils.ParseJSONString(img));
-                weakReference.get().LoadDetailImg(Utils.ParseJSONString(detailImg));
+                JSONObject bodyObject = JSONObject.parseObject(body);
+                if (bodyObject != null) {
+                    String title = bodyObject.getJSONObject("data").getString("title");
+                    String desc = bodyObject.getJSONObject("data").getString("desc");
+                    String img = bodyObject.getJSONObject("data").getString("banner");
+                    String sell = bodyObject.getJSONObject("data").getString("sell");
+                    String price = bodyObject.getJSONObject("data").getString("price");
+                    String detailImg = bodyObject.getJSONObject("data").getString("detail_img");
+                    weakReference.get().titleTextView.setText(title);
+                    weakReference.get().descTextView.setText(desc);
+                    weakReference.get().priceTextView.setText(price + "¥");
+                    weakReference.get().sellTextView.setText("已卖 " + sell);
+                    weakReference.get().LoadBannerImg(Utils.ParseJSONString(img));
+                    weakReference.get().LoadDetailImg(Utils.ParseJSONString(detailImg));
+                }
             }
         }
     }

@@ -49,15 +49,18 @@ public class NotificationsFragment extends Fragment {
             if (code == 0) {
                 String body = msg.obj.toString();
                 System.out.println(body);
-                String avatarUrl = JSONObject.parseObject(body).getJSONObject("data").getString("avatar");
-                String nickName = JSONObject.parseObject(body).getJSONObject("data").getString("nick_name");
-                String phone = JSONObject.parseObject(body).getJSONObject("data").getString("phone");
-                Context context = notificationsFragmentWeakReference.get().getContext();
-                if (null != context) {
-                    Glide.with(context).load(avatarUrl).into(notificationsFragmentWeakReference.get().avatarImgView);
+                JSONObject bodyObject = JSONObject.parseObject(body);
+                if (bodyObject != null) {
+                    String avatarUrl = bodyObject.getJSONObject("data").getString("avatar");
+                    String nickName = bodyObject.getJSONObject("data").getString("nick_name");
+                    String phone = bodyObject.getJSONObject("data").getString("phone");
+                    Context context = notificationsFragmentWeakReference.get().getContext();
+                    if (null != context) {
+                        Glide.with(context).load(avatarUrl).into(notificationsFragmentWeakReference.get().avatarImgView);
+                    }
+                    notificationsFragmentWeakReference.get().nickNameTextView.setText(nickName);
+                    notificationsFragmentWeakReference.get().phoneTextView.setText(phone);
                 }
-                notificationsFragmentWeakReference.get().nickNameTextView.setText(nickName);
-                notificationsFragmentWeakReference.get().phoneTextView.setText(phone);
 
             }
             notificationsFragmentWeakReference.get().waitDialog.cancel();

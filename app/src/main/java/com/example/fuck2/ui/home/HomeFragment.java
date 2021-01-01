@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.bumptech.glide.Glide;
 import com.example.fuck2.GoodsDetail;
 import com.example.fuck2.R;
 import com.example.fuck2.SearchActivity;
@@ -40,6 +41,8 @@ public class HomeFragment extends Fragment {
     private List<PreViewGoods> newest = new ArrayList<>();
     private HomeFragment.MHandler mHandler;
     private SearchView searchView;
+    private List<String> bannerUrl = new ArrayList<>();
+    private List<Integer> bannerSubGoodsId = new ArrayList<>();
 
     static private class MHandler extends Handler {
         private final WeakReference<HomeFragment> homeFragmentWeakReference;
@@ -52,27 +55,46 @@ public class HomeFragment extends Fragment {
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
             int code = msg.what;
+            String body = msg.obj.toString();
+
             if (code == 0 || code == 1) {
-                String body = msg.obj.toString();
-                JSONArray data = JSONObject.parseObject(body).getJSONArray("data");
                 List<PreViewGoods> obj = null;
-                if (code == 0) {
-                    obj = homeFragmentWeakReference.get().hot;
-                } else {
-                    obj = homeFragmentWeakReference.get().newest;
+                JSONObject bodyObject = JSONObject.parseObject(body);
+                if (bodyObject != null) {
+                    JSONArray data = bodyObject.getJSONArray("data");
+                    if (code == 0) {
+                        obj = homeFragmentWeakReference.get().hot;
+                    } else {
+                        obj = homeFragmentWeakReference.get().newest;
+                    }
+                    for (int i = 0; data != null && i < obj.size(); i++) {
+                        obj.get(i).setTitle(data.getJSONObject(i).getString("title"));
+                        obj.get(i).setPrice(data.getJSONObject(i).getFloat("price"));
+                        obj.get(i).setImageUrl(data.getJSONObject(i).getString("img"));
+                        obj.get(i).setSubGoodsId(data.getJSONObject(i).getIntValue("id"));
+                    }
                 }
-                for (int i = 0; i < obj.size(); i++) {
-                    obj.get(i).setTitle(data.getJSONObject(i).getString("title"));
-                    obj.get(i).setPrice(data.getJSONObject(i).getFloat("price"));
-                    obj.get(i).setImageUrl(data.getJSONObject(i).getString("img"));
-                    obj.get(i).setSubGoodsId(data.getJSONObject(i).getIntValue("id"));
+            } else if (code == 2) {
+                JSONObject bodyObject = JSONObject.parseObject(body);
+                if (bodyObject != null) {
+                    JSONArray arrayData = bodyObject.getJSONArray("data");
+                    homeFragmentWeakReference.get().bannerUrl.clear();
+                    homeFragmentWeakReference.get().bannerSubGoodsId.clear();
+                    for (int i = 0; arrayData != null && i < arrayData.size(); i++) {
+                        String img = arrayData.getJSONObject(i).getString("img");
+                        Integer subGoodsId = arrayData.getJSONObject(i).getIntValue("sub_goods_id");
+                        homeFragmentWeakReference.get().bannerUrl.add(img);
+                        homeFragmentWeakReference.get().bannerSubGoodsId.add(subGoodsId);
+                        homeFragmentWeakReference.get().LoadBannerImg();
+                    }
                 }
+
             }
 
         }
     }
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
+    public View onCreateView(@NonNull final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_home, container, false);
         banner = root.findViewById(R.id.banner);
@@ -80,8 +102,13 @@ public class HomeFragment extends Fragment {
         banner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
-                Intent intent = new Intent(getContext(), GoodsDetail.class);
-                startActivity(intent);
+
+                if (position <= bannerSubGoodsId.size() - 1) {
+                    Intent intent = new Intent(getContext(), GoodsDetail.class);
+                    intent.putExtra("sub_goods_id", bannerSubGoodsId.get(position));
+                    startActivity(intent);
+                }
+
             }
         });
         searchView.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +127,7 @@ public class HomeFragment extends Fragment {
         });
         searchView.onActionViewCollapsed();
         mHandler = new MHandler(this);
+        new ApiThread(2, mHandler, "get", Config.getServerAddress() + "/v1/home/banner", Utils.EmptyString).start();
         this.LoadBannerImg();
         this.LoadHot();
         this.LoadNewest();
@@ -151,17 +179,15 @@ public class HomeFragment extends Fragment {
     }
 
     private void LoadBannerImg() {
-        ArrayList<Integer> img = new ArrayList<>();
-        img.add(R.drawable.goods_1);
-        img.add(R.drawable.goods_2);
-        img.add(R.drawable.goods_3);
-
         ArrayList<String> title = new ArrayList<>();
-        title.add("");
-        title.add("");
-        title.add("");
-
-        banner.setImages(img);
+        for (int i = 0; i < bannerUrl.size(); i++) {
+            title.add(Utils.EmptyString);
+        }
+        if (bannerUrl.isEmpty()) {
+            bannerUrl.add(Utils.EmptyString);
+            title.add(Utils.EmptyString);
+        }
+        banner.setImages(bannerUrl);
         banner.setImageLoader(new ImageLoadBanner());
         banner.setBannerTitles(title);
         banner.setDelayTime(5500);
@@ -175,7 +201,12 @@ public class HomeFragment extends Fragment {
     static class ImageLoadBanner extends ImageLoader {
         @Override
         public void displayImage(Context context, Object path, ImageView imageView) {
-            imageView.setImageResource(Integer.parseInt(path.toString()));
+            if (path.toString().length() == 0) {
+                imageView.setImageResource(R.drawable.logo);
+                return;
+            }
+            Glide.with(context).load(path).into(imageView);
+
         }
     }
 }

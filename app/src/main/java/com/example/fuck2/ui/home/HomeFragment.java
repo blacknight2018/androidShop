@@ -88,7 +88,15 @@ public class HomeFragment extends Fragment {
                         homeFragmentWeakReference.get().LoadBannerImg();
                     }
                 }
-
+            } else if (code == 3) {
+                JSONObject bodyObject = JSONObject.parseObject(body);
+                if (bodyObject != null) {
+                    int userId = bodyObject.getIntValue("data");
+                    if (userId == 0) {
+                        Utils.WritePreferences(homeFragmentWeakReference.get().getContext(), "Cookie", Utils.EmptyString);
+                        homeFragmentWeakReference.get().getActivity().finish();
+                    }
+                }
             }
 
         }
@@ -208,5 +216,11 @@ public class HomeFragment extends Fragment {
             Glide.with(context).load(path).into(imageView);
 
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        new ApiThread(3, mHandler, "get-c", Config.getServerAddress() + "/v1/user/valid", Utils.EmptyString, Config.getCookie()).start();
     }
 }

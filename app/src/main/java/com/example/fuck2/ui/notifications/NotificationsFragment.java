@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
 import com.example.fuck2.AddressList;
@@ -51,15 +52,18 @@ public class NotificationsFragment extends Fragment {
                 System.out.println(body);
                 JSONObject bodyObject = JSONObject.parseObject(body);
                 if (bodyObject != null) {
-                    String avatarUrl = bodyObject.getJSONObject("data").getString("avatar");
-                    String nickName = bodyObject.getJSONObject("data").getString("nick_name");
-                    String phone = bodyObject.getJSONObject("data").getString("phone");
-                    Context context = notificationsFragmentWeakReference.get().getContext();
-                    if (null != context) {
-                        Glide.with(context).load(avatarUrl).into(notificationsFragmentWeakReference.get().avatarImgView);
+                    JSONObject dataObject = bodyObject.getJSONObject("data");
+                    if (dataObject != null) {
+                        String avatarUrl = dataObject.getString("avatar");
+                        String nickName = dataObject.getString("nick_name");
+                        String phone = dataObject.getString("phone");
+                        Context context = notificationsFragmentWeakReference.get().getContext();
+                        if (null != context) {
+                            Glide.with(context).load(avatarUrl).into(notificationsFragmentWeakReference.get().avatarImgView);
+                        }
+                        notificationsFragmentWeakReference.get().nickNameTextView.setText(nickName);
+                        notificationsFragmentWeakReference.get().phoneTextView.setText(phone);
                     }
-                    notificationsFragmentWeakReference.get().nickNameTextView.setText(nickName);
-                    notificationsFragmentWeakReference.get().phoneTextView.setText(phone);
                 }
 
             }

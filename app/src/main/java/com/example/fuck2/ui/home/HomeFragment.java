@@ -44,6 +44,7 @@ public class HomeFragment extends Fragment {
     private List<String> bannerUrl = new ArrayList<>();
     private List<Integer> bannerSubGoodsId = new ArrayList<>();
 
+
     static private class MHandler extends Handler {
         private final WeakReference<HomeFragment> homeFragmentWeakReference;
 
@@ -95,11 +96,23 @@ public class HomeFragment extends Fragment {
                     if (userId == 0) {
                         Utils.WritePreferences(homeFragmentWeakReference.get().getContext(), "Cookie", Utils.EmptyString);
                         homeFragmentWeakReference.get().getActivity().finish();
+                    } else {
+                        homeFragmentWeakReference.get().loadView();
                     }
                 }
             }
 
         }
+    }
+
+    /**
+     * 用于校验Token后加载图片,防止加载时由于Token无效销毁Activity后还在利用Context加载图片
+     */
+    void loadView() {
+        new ApiThread(2, mHandler, "get", Config.getServerAddress() + "/v1/home/banner", Utils.EmptyString).start();
+        this.LoadBannerImg();
+        this.LoadHot();
+        this.LoadNewest();
     }
 
     public View onCreateView(@NonNull final LayoutInflater inflater,
@@ -135,10 +148,6 @@ public class HomeFragment extends Fragment {
         });
         searchView.onActionViewCollapsed();
         mHandler = new MHandler(this);
-        new ApiThread(2, mHandler, "get", Config.getServerAddress() + "/v1/home/banner", Utils.EmptyString).start();
-        this.LoadBannerImg();
-        this.LoadHot();
-        this.LoadNewest();
         return root;
     }
 
@@ -161,6 +170,7 @@ public class HomeFragment extends Fragment {
                 }
             });
         }
+
         new ApiThread(0, mHandler, "get", Config.getServerAddress() + "/v1/home/hot", Utils.EmptyString).start();
     }
 
@@ -214,7 +224,6 @@ public class HomeFragment extends Fragment {
                 return;
             }
             Glide.with(context).load(path).into(imageView);
-
         }
     }
 

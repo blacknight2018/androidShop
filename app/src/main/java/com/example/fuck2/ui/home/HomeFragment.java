@@ -69,10 +69,12 @@ public class HomeFragment extends Fragment {
                         obj = homeFragmentWeakReference.get().newest;
                     }
                     for (int i = 0; data != null && i < obj.size(); i++) {
-                        obj.get(i).setTitle(data.getJSONObject(i).getString("title"));
-                        obj.get(i).setPrice(data.getJSONObject(i).getFloat("price"));
-                        obj.get(i).setImageUrl(data.getJSONObject(i).getString("img"));
-                        obj.get(i).setSubGoodsId(data.getJSONObject(i).getIntValue("id"));
+                        if(i<=data.size()-1) {
+                            obj.get(i).setTitle(data.getJSONObject(i).getString("title"));
+                            obj.get(i).setPrice(data.getJSONObject(i).getFloat("price"));
+                            obj.get(i).setImageUrl(data.getJSONObject(i).getString("img"));
+                            obj.get(i).setSubGoodsId(data.getJSONObject(i).getIntValue("id"));
+                        }
                     }
                 }
             } else if (code == 2) {

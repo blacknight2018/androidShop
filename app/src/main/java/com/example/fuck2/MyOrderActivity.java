@@ -171,6 +171,8 @@ public class MyOrderActivity extends AppCompatActivity {
         waitDialog = new ProgressDialog(MyOrderActivity.this);
         mHandler = new MHandler(MyOrderActivity.this);
 
-
+        status = Status.All.ordinal();
+        clear();
+        request();
     }
 }

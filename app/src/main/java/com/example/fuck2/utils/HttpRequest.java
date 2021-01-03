@@ -10,7 +10,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
@@ -64,7 +66,49 @@ public class HttpRequest {
         return responseString;
     }
 
-    static String sendGet(String url, String param) {
+    public static String sendPut(String url, String param, String cookie) {
+        String result = EmptyString;
+        BufferedReader in = null;
+        PrintWriter out = null;
+        try {
+            HttpURLConnection httpConn = (HttpURLConnection) (new URL(url).openConnection());
+            httpConn.setRequestMethod("PUT");
+            httpConn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            httpConn.setRequestProperty("Accept", "*/*");
+            httpConn.setRequestProperty("Connection", "Keep-Alive");
+            httpConn.setRequestProperty("Cookie", cookie);
+            httpConn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.193 Safari/537.36");
+            httpConn.setDoOutput(true);
+            httpConn.setDoInput(true);
+            out = new PrintWriter(httpConn.getOutputStream());
+
+            out.print(param);
+
+            out.flush();
+            in = new BufferedReader(new InputStreamReader(
+                    httpConn.getInputStream()));
+            String line;
+            while ((line = in.readLine()) != null) {
+                result = result + line;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (out != null) {
+                    out.close();
+                }
+                if (in != null) {
+                    in.close();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    public static String sendGet(String url, String param) {
         String result = EmptyString;
         BufferedReader in = null;
         try {
@@ -72,10 +116,9 @@ public class HttpRequest {
             URL realUrl = new URL(urlNameString);
 
             URLConnection connection = realUrl.openConnection();
-
-            connection.setRequestProperty("accept", "*/*");
-            connection.setRequestProperty("connection", "Keep-Alive");
-            connection.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+            connection.setRequestProperty("Accept", "*/*");
+            connection.setRequestProperty("Connection", "Keep-Alive");
+            connection.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
 
             connection.connect();
 
@@ -100,7 +143,7 @@ public class HttpRequest {
         return result;
     }
 
-    static String sendPost(String url, String param) {
+    public static String sendPost(String url, String param) {
         PrintWriter out = null;
         BufferedReader in = null;
         String result = EmptyString;
@@ -109,9 +152,9 @@ public class HttpRequest {
 
             URLConnection conn = realUrl.openConnection();
 
-            conn.setRequestProperty("accept", "*/*");
-            conn.setRequestProperty("connection", "Keep-Alive");
-            conn.setRequestProperty("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.193 Safari/537.36");
+            conn.setRequestProperty("Accept", "*/*");
+            conn.setRequestProperty("Connection", "Keep-Alive");
+            conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.193 Safari/537.36");
 
             conn.setDoOutput(true);
             conn.setDoInput(true);
@@ -144,7 +187,7 @@ public class HttpRequest {
         return result;
     }
 
-    static String sendGetWithCookie(String url, String param, String cookie) {
+    public static String sendGetWithCookie(String url, String param, String cookie) {
         String result = EmptyString;
         BufferedReader in = null;
         try {
@@ -153,10 +196,10 @@ public class HttpRequest {
 
             URLConnection connection = realUrl.openConnection();
 
-            connection.setRequestProperty("accept", "*/*");
-            connection.setRequestProperty("connection", "Keep-Alive");
-            connection.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
-            connection.setRequestProperty("cookie", cookie);
+            connection.setRequestProperty("Accept", "*/*");
+            connection.setRequestProperty("Connection", "Keep-Alive");
+            connection.setRequestProperty("User-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+            connection.setRequestProperty("Cookie", cookie);
             connection.connect();
 
             Map<String, List<String>> map = connection.getHeaderFields();
@@ -180,7 +223,7 @@ public class HttpRequest {
         return result;
     }
 
-    static String sendPostWithCookie(String url, String param, String cookie) {
+    public static String sendPostWithCookie(String url, String param, String cookie) {
         PrintWriter out = null;
         BufferedReader in = null;
         String result = EmptyString;
@@ -189,10 +232,10 @@ public class HttpRequest {
 
             URLConnection conn = realUrl.openConnection();
 
-            conn.setRequestProperty("accept", "*/*");
-            conn.setRequestProperty("connection", "Keep-Alive");
-            conn.setRequestProperty("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.193 Safari/537.36");
-            conn.setRequestProperty("cookie", cookie);
+            conn.setRequestProperty("Accept", "*/*");
+            conn.setRequestProperty("Connection", "Keep-Alive");
+            conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.193 Safari/537.36");
+            conn.setRequestProperty("Cookie", cookie);
             conn.setDoOutput(true);
             conn.setDoInput(true);
 
@@ -224,7 +267,7 @@ public class HttpRequest {
         return result;
     }
 
-    static Response sendPostWithMultiRes(String url, String param) {
+    public static Response sendPostWithMultiRes(String url, String param) {
         Response response = new Response();
         PrintWriter out = null;
         BufferedReader in = null;
@@ -234,9 +277,9 @@ public class HttpRequest {
 
             URLConnection conn = realUrl.openConnection();
 
-            conn.setRequestProperty("accept", "*/*");
-            conn.setRequestProperty("connection", "Keep-Alive");
-            conn.setRequestProperty("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.193 Safari/537.36");
+            conn.setRequestProperty("Accept", "*/*");
+            conn.setRequestProperty("Connection", "Keep-Alive");
+            conn.setRequestProperty("User-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.193 Safari/537.36");
 
             conn.setDoOutput(true);
             conn.setDoInput(true);
@@ -289,5 +332,9 @@ public class HttpRequest {
         public void setBody(String body) {
             Body = body;
         }
+    }
+
+    public static void main(String[] args) {
+        //sendPut("http://127.0.0.1:7777/v1/cart","cart_id=1");
     }
 }

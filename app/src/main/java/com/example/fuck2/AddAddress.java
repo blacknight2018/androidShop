@@ -12,6 +12,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.app.AlertDialog;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -80,6 +81,16 @@ public class AddAddress extends AppCompatActivity {
                         finish();
                     }
                 }
+            } else if (3 == msg.what) {
+                String responseBody = (String) msg.obj;
+                JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(responseBody);
+                if (jsonObject != null) {
+                    Integer integer = jsonObject.getInteger("code");
+                    if (integer != null && integer == Result.ErrCode.Ok.ordinal()) {
+                        Toast.makeText(AddAddress.this, "保存成功", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }
             }
         }
 
@@ -106,7 +117,7 @@ public class AddAddress extends AppCompatActivity {
         setContentView(R.layout.activity_add_address);
         mHandler = new MHandler(this);
         Intent param = getIntent();
-        final int address_id = param.getIntExtra("address_id", 0);
+        final int addressId = param.getIntExtra("address_id", 0);
 
         nameView = findViewById(R.id.nick_name);
         menRadio = findViewById(R.id.men);
@@ -129,7 +140,7 @@ public class AddAddress extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         HashMap<String, String> param = new HashMap<>();
-                        param.put("address_id", String.valueOf(address_id));
+                        param.put("address_id", String.valueOf(addressId));
                         new ApiThread(2, mHandler, "delete-c", Config.getServerAddress() + "/v1/address", Utils.MapToHttpParam(param), Config.getCookie()).start();
                     }
                 });
@@ -157,12 +168,17 @@ public class AddAddress extends AppCompatActivity {
                     return;
                 }
                 param.put("detail", detailEdit.getText().toString());
-                new ApiThread(0, mHandler, "post-c", Config.getServerAddress() + "/v1/address", Utils.MapToHttpParam(param), Config.getCookie()).start();
+                if (addressId == 0) {
+                    param.put("address_id", String.valueOf(addressId));
+                    new ApiThread(0, mHandler, "put-c", Config.getServerAddress() + "/v1/address", Utils.MapToHttpParam(param), Config.getCookie()).start();
+                } else {
+                    new ApiThread(3, mHandler, "post-c", Config.getServerAddress() + "/v1/address", Utils.MapToHttpParam(param), Config.getCookie()).start();
+                }
             }
         });
-        if (0 != address_id) {
-            loadAddress(address_id);
-
+        this.addressId = addressId;
+        if (0 != addressId) {
+            loadAddress(addressId);
         } else {
             deleteBtn.setVisibility(View.GONE);
         }

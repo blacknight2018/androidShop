@@ -54,6 +54,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
+        android:id="@+id/item_address"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="30dp"
@@ -71,7 +72,7 @@
 
         <TextView
 
-            android:id="@+id/item_address"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -82,6 +83,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/item_order"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="30dp"
@@ -98,7 +100,7 @@
             android:background="@drawable/order" />
 
         <TextView
-            android:id="@+id/item_order"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -111,6 +113,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/item_setting"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="30dp"
@@ -127,7 +130,7 @@
             android:background="@drawable/setting" />
 
         <TextView
-            android:id="@+id/item_setting"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -140,6 +143,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/item_exit"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="30dp"
@@ -156,7 +160,7 @@
         <!--            android:background="@drawable/exit" />-->
 
         <TextView
-            android:id="@+id/item_exit"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

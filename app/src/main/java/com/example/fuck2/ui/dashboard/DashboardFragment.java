@@ -172,10 +172,11 @@ public class DashboardFragment extends Fragment {
 //              HashMap<String, String> param = new HashMap<>();
 //              System.out.println(JSONArray.toJSONString(param));
 //              param.put("cart_id", JSONArray.toJSONString(param));
-
-                Intent intent = new Intent(getContext(), CreateOrder.class);
-                intent.putExtra("cart_id", JSONArray.toJSONString(cartSet));
-                startActivity(intent);
+                if(cartSet.length!=0) {
+                    Intent intent = new Intent(getContext(), CreateOrder.class);
+                    intent.putExtra("cart_id", JSONArray.toJSONString(cartSet));
+                    startActivity(intent);
+                }
             }
         });
         cartStatusChange = new View.OnClickListener() {
@@ -205,6 +206,7 @@ public class DashboardFragment extends Fragment {
         CartItem cartItem = new CartItem(getContext()) {
             @Override
             public void plusAmount() {
+                calcTotalPrice();
                 super.plusAmount();
                 setAmount(getAmount() + 1);
                 HashMap<String, String> param = new HashMap<>();
@@ -216,6 +218,7 @@ public class DashboardFragment extends Fragment {
 
             @Override
             public void minusAmount() {
+                calcTotalPrice();
                 super.minusAmount();
                 if (getAmount() == 1) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());

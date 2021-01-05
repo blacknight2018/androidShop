@@ -10,6 +10,7 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -60,6 +61,7 @@ public class NotificationsFragment extends Fragment {
                         Context context = notificationsFragmentWeakReference.get().getContext();
                         if (null != context) {
                             Glide.with(context).load(avatarUrl).into(notificationsFragmentWeakReference.get().avatarImgView);
+                            Utils.WritePreferences(context,"AvatarUrl",avatarUrl);
                         }
                         notificationsFragmentWeakReference.get().nickNameTextView.setText(nickName);
                         notificationsFragmentWeakReference.get().phoneTextView.setText(phone);
@@ -75,7 +77,7 @@ public class NotificationsFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
         final MainActivity mainActivity = (MainActivity) getContext();
-        TextView addressItemView = root.findViewById(R.id.item_address);
+        LinearLayout addressItemView = root.findViewById(R.id.item_address);
         addressItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +86,7 @@ public class NotificationsFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        TextView orderItemView = root.findViewById(R.id.item_order);
+        LinearLayout orderItemView = root.findViewById(R.id.item_order);
         orderItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,7 +94,7 @@ public class NotificationsFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        TextView exitItemView = root.findViewById(R.id.item_exit);
+        LinearLayout exitItemView = root.findViewById(R.id.item_exit);
         exitItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

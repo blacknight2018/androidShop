@@ -128,8 +128,10 @@ public class HomeFragment extends Fragment {
 
                 if (position <= bannerSubGoodsId.size() - 1) {
                     Intent intent = new Intent(getContext(), GoodsDetail.class);
-                    intent.putExtra("sub_goods_id", bannerSubGoodsId.get(position));
-                    startActivity(intent);
+                    if(bannerSubGoodsId.get(position)!=0) {
+                        intent.putExtra("sub_goods_id", bannerSubGoodsId.get(position));
+                        startActivity(intent);
+                    }
                 }
 
             }
@@ -167,8 +169,10 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getContext(), GoodsDetail.class);
-                    intent.putExtra("sub_goods_id", hot.get(finalI).getSubGoodsId());
-                    startActivity(intent);
+                    if(hot.get(finalI).getSubGoodsId()!=0) {
+                        intent.putExtra("sub_goods_id", hot.get(finalI).getSubGoodsId());
+                        startActivity(intent);
+                    }
                 }
             });
         }
@@ -190,8 +194,10 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getContext(), GoodsDetail.class);
-                    intent.putExtra("sub_goods_id", newest.get(finalI).getSubGoodsId());
-                    startActivity(intent);
+                    if(newest.get(finalI).getSubGoodsId()!=0) {
+                        intent.putExtra("sub_goods_id", newest.get(finalI).getSubGoodsId());
+                        startActivity(intent);
+                    }
                 }
             });
         }

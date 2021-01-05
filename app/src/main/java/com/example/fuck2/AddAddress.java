@@ -168,11 +168,11 @@ public class AddAddress extends AppCompatActivity {
                     return;
                 }
                 param.put("detail", detailEdit.getText().toString());
-                if (addressId == 0) {
+                if (addressId != 0) {
                     param.put("address_id", String.valueOf(addressId));
-                    new ApiThread(0, mHandler, "put-c", Config.getServerAddress() + "/v1/address", Utils.MapToHttpParam(param), Config.getCookie()).start();
+                    new ApiThread(3, mHandler, "put-c", Config.getServerAddress() + "/v1/address", Utils.MapToHttpParam(param), Config.getCookie()).start();
                 } else {
-                    new ApiThread(3, mHandler, "post-c", Config.getServerAddress() + "/v1/address", Utils.MapToHttpParam(param), Config.getCookie()).start();
+                    new ApiThread(0, mHandler, "post-c", Config.getServerAddress() + "/v1/address", Utils.MapToHttpParam(param), Config.getCookie()).start();
                 }
             }
         });

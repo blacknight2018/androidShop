@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -37,6 +40,10 @@ public class SearchActivity extends AppCompatActivity {
     private List<SearchGoodsView> searchGoodsViewList;
     private TextView foundTipView;
     private ScrollBottomScrollView scrollBottomScrollView;
+    private RadioButton priceRadio;
+    private RadioButton createTimeRadio;
+    private RadioGroup radioGroup;
+    private String searchTitle;
 
     private class MHandler extends Handler {
         private WeakReference<SearchActivity> weakReference;
@@ -120,6 +127,32 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
+    private void search() {
+        clear();
+        waitDialog.setTitle("加载中");
+        waitDialog.setMessage("搜索中");
+        waitDialog.create();
+        waitDialog.show();
+        limit = maxLimit;
+        offset = 0;
+        HashMap<String, String> param = new HashMap<>();
+        param.put("key", searchTitle);
+        param.put("limit", String.valueOf(limit));
+        param.put("offset", String.valueOf(offset));
+        if (priceRadio.isChecked()) {
+            param.put("price", "desc");
+        } else {
+            param.put("price", "asc");
+        }
+
+        if (createTimeRadio.isChecked()) {
+            param.put("create_time", "desc");
+        } else {
+            param.put("create_time", "asc");
+        }
+        new ApiThread(0, mHandler, "get", Config.getServerAddress() + "/v1/goods/search", Utils.MapToHttpParam(param)).start();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,6 +164,9 @@ public class SearchActivity extends AppCompatActivity {
         resultLayout = findViewById(R.id.result);
         foundTipView = findViewById(R.id.found_tips);
         scrollBottomScrollView = findViewById(R.id.scroll);
+        priceRadio = findViewById(R.id.price);
+        createTimeRadio = findViewById(R.id.create_time);
+        radioGroup = findViewById(R.id.radio_group);
         searchView.setSubmitButtonEnabled(true);
         searchView.setActivated(true);
         searchView.setIconified(false);
@@ -147,26 +183,24 @@ public class SearchActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                waitDialog.setTitle("加载中");
-                waitDialog.setMessage("搜索中");
-                waitDialog.create();
-                waitDialog.show();
-                limit = maxLimit;
-                offset = 0;
-                HashMap<String, String> param = new HashMap<>();
-                param.put("key", query);
-                param.put("limit", String.valueOf(limit));
-                param.put("offset", String.valueOf(offset));
-                clear();
-                new ApiThread(0, mHandler, "get", Config.getServerAddress() + "/v1/goods/search", Utils.MapToHttpParam(param)).start();
+                searchTitle = query;
+                search();
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                searchTitle = newText;
                 return false;
             }
         });
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                search();
+            }
+        });
+
 
     }
 

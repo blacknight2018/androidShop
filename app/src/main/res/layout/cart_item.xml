@@ -27,14 +27,18 @@
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="80dp"
-        android:text="Good Thing"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="Good Thing2222222222222232222"
         android:textColor="#000000"
-        android:textSize="24dp"
+        android:textSize="17dp"
+        android:maxEms="10"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.514" />
@@ -44,9 +48,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        android:text="It is really a good thing"
-        android:textSize="20dp"
+        android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:maxEms="10"
+        android:text="It is really a good thing333333333333333333333"
+        android:textSize="16dp"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 

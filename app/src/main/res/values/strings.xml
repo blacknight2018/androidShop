@@ -16,7 +16,6 @@
     <string name="title_pay_order">未支付</string>
     <string name="title_not_pay_order">已支付</string>
     <string name="title_delivery">已发货</string>
-    <string name="title_not_delivery">未发货</string>
     <string name="sex_man">男</string>
     <string name="sex_female">女</string>
     <string name="title_detail">详细</string>
@@ -32,6 +31,8 @@
     <string name="activity_order">我的订单</string>
     <string name="tip_spec">选择商品规格</string>
     <string name="btn_add_cart">添加到购物车</string>
+    <string name="btn_pay_now">立即支付</string>
+    <string name="btn_confirm_delivery">确认收货</string>
     <string name="prompt_phone">手机号码</string>
     <string name="prompt_password">密码</string>
     <string name="action_sign_in">登录/注册</string>

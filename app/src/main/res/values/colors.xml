@@ -9,6 +9,8 @@
     <color name="price">#ff0000</color>
     <color name="btn_submit">#4CAF50</color>
     <color name="btn_submit2">#FF5252</color>
+    <color name="btn_pay">#ED002F</color>
+    <color name="btn_confirm">#409EFF</color>
     <color name="btn_add">#388E3C</color>
-    <color name="divider">#000000</color>
+    <color name="divider">#F4F4F4</color>
 </resources>

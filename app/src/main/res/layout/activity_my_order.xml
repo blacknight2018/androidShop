@@ -60,16 +60,6 @@
             android:textColor="@drawable/order_menu_item"
             android:textSize="16sp" />
 
-        <RadioButton
-            android:id="@+id/btn_5"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:button="@null"
-            android:gravity="center"
-            android:text="@string/title_not_delivery"
-            android:textColor="@drawable/order_menu_item"
-            android:textSize="16sp" />
     </RadioGroup>
 
     <com.example.fuck2.ui.ScrollBottomScrollView

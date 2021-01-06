@@ -243,6 +243,10 @@ public class DashboardFragment extends Fragment {
                     builder.show();
                 } else {
                     setAmount(getAmount() - 1);
+                    HashMap<String, String> param = new HashMap<>();
+                    param.put("cart_id", String.valueOf(this.getCartId()));
+                    param.put("amount", String.valueOf(this.getAmount()));
+                    new ApiThread(2, mHandler, "put-c", Config.getServerAddress() + "/v1/cart", Utils.MapToHttpParam(param), Config.getCookie()).start();
                 }
             }
         };

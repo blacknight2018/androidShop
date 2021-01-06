@@ -1,6 +1,8 @@
 package com.example.fuck2.config;
 
 public class Config {
+
+
     public static String Cookie;
 
     public static String getCookie() {

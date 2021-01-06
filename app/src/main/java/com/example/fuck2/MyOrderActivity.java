@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.fuck2.config.Config;
+import com.example.fuck2.result.Result;
 import com.example.fuck2.ui.OrderItem;
 import com.example.fuck2.ui.ScrollBottomScrollView;
 import com.example.fuck2.utils.ApiThread;
@@ -37,9 +38,6 @@ public class MyOrderActivity extends AppCompatActivity {
     private ArrayList<OrderItem> orderItemList;
     private MHandler mHandler;
 
-    private enum Status {
-        UnPay, Pay, UnDelivery, Delivery, All
-    }
 
     private class MHandler extends Handler {
         private WeakReference<MyOrderActivity> weakReference;
@@ -58,14 +56,22 @@ public class MyOrderActivity extends AppCompatActivity {
                         float price = itemObject.getFloatValue("total_price");
                         JSONArray subGoodsArray = itemObject.getJSONArray("sub_goods");
                         JSONArray imgArray = itemObject.getJSONArray("img");
-
+                        int status = itemObject.getIntValue("status");
+                        int orderId = itemObject.getIntValue("id");
                         ArrayList<String> imgList = new ArrayList<>();
                         for (int j = 0; imgArray != null && !imgArray.isEmpty() && j < imgArray.size(); j++) {
                             imgList.add(imgArray.getString(j));
                         }
                         weakReference.get().offset++;
-                        weakReference.get().addOrder(CreateTime, subGoodsArray.size(), price, imgList);
+                        weakReference.get().addOrder(orderId, CreateTime, subGoodsArray.size(), price, imgList, status);
                     }
+                }
+            } else if (1 == msg.what) {
+                String responseData = msg.obj.toString();
+                JSONObject jsonObject = JSONObject.parseObject(responseData);
+                if (jsonObject != null && jsonObject.getIntValue("code") == 0) {
+                    clear();
+                    request();
                 }
             }
             waitDialog.cancel();
@@ -83,8 +89,23 @@ public class MyOrderActivity extends AppCompatActivity {
         orderSet.removeAllViews();
     }
 
-    private void addOrder(String time, int amount, float price, ArrayList<String> img) {
-        OrderItem orderItem = new OrderItem(MyOrderActivity.this);
+    private void addOrder(final int orderId, String time, int amount, float price, ArrayList<String> img, int status) {
+        OrderItem orderItem = new OrderItem(MyOrderActivity.this) {
+            @Override
+            public void onPay() {
+                super.onPay();
+                HashMap<String, String> param = new HashMap<>();
+                param.put("order_id", String.valueOf(orderId));
+                new ApiThread(1, mHandler, "post-c", Config.getServerAddress() + "/v1/order/pay", Utils.MapToHttpParam(param), Config.getCookie()).start();
+
+            }
+
+            @Override
+            public void onConfirm() {
+                super.onConfirm();
+
+            }
+        };
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.setMargins(0, 10, 0, 10);
         orderItem.setLayoutParams(params);
@@ -92,6 +113,8 @@ public class MyOrderActivity extends AppCompatActivity {
         orderItem.setAmount(amount);
         orderItem.setPrice(price);
         orderItem.setImg(img);
+        orderItem.setStatus(status);
+        orderItem.setOrderId(orderId);
         orderItemList.add(orderItem);
         orderSet.addView(orderItem);
     }
@@ -120,11 +143,10 @@ public class MyOrderActivity extends AppCompatActivity {
         RadioButton radioButton2 = findViewById(R.id.btn_2);
         RadioButton radioButton3 = findViewById(R.id.btn_3);
         RadioButton radioButton4 = findViewById(R.id.btn_4);
-        RadioButton radioButton5 = findViewById(R.id.btn_5);
         radioButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                status = Status.All.ordinal();
+                status = Result.Status.All.ordinal();
                 clear();
                 request();
             }
@@ -132,7 +154,7 @@ public class MyOrderActivity extends AppCompatActivity {
         radioButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                status = Status.UnPay.ordinal();
+                status = Result.Status.UnPay.ordinal();
                 clear();
                 request();
             }
@@ -140,7 +162,7 @@ public class MyOrderActivity extends AppCompatActivity {
         radioButton3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                status = Status.Pay.ordinal();
+                status = Result.Status.Pay.ordinal();
                 clear();
                 request();
             }
@@ -148,19 +170,12 @@ public class MyOrderActivity extends AppCompatActivity {
         radioButton4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                status = Status.Delivery.ordinal();
+                status = Result.Status.Delivery.ordinal();
                 clear();
                 request();
             }
         });
-        radioButton5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                status = Status.UnPay.ordinal();
-                clear();
-                request();
-            }
-        });
+
         scrollView.registerOnScrollViewScrollToBottom(new ScrollBottomScrollView.OnScrollBottomListener() {
             @Override
             public void scrollToBottom() {
@@ -171,7 +186,7 @@ public class MyOrderActivity extends AppCompatActivity {
         waitDialog = new ProgressDialog(MyOrderActivity.this);
         mHandler = new MHandler(MyOrderActivity.this);
 
-        status = Status.All.ordinal();
+        status = Result.Status.All.ordinal();
         clear();
         request();
     }

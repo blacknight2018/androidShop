@@ -14,6 +14,11 @@ public class Result {
         StokeNotEnough,
     }
 
+    public enum Status {
+        UnPay, Pay, Delivery, All
+    }
+
+
     public static HashMap<Integer, String> Msg = new HashMap<>();
 
     public static String getMsg(int code) {

@@ -11,7 +11,7 @@
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="5dp"
+        android:paddingStart="5dp"
         android:text="2012-02-12"
         android:textColor="#000000" />
 
@@ -80,5 +80,37 @@
             android:text="100"
             android:textColor="@color/price"
             android:textSize="16sp" />
+    </com.google.android.flexbox.FlexboxLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider" />
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/btn_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        app:justifyContent="flex_end">
+
+        <Button
+            android:id="@+id/btn_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/btn_pay"
+            android:text="@string/btn_pay_now"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/btn_confirm"
+            android:text="@string/btn_confirm_delivery"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
     </com.google.android.flexbox.FlexboxLayout>
 </LinearLayout>
